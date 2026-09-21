@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
         });
 
         webView.setWebChromeClient(new WebChromeClient());
-        webView.loadUrl("https://scinfinitystudios.github.io/sc-latam.community/");
+        webView.loadUrl("https://sc-latam-community.vercel.app/");
     }
 
     private boolean isTikTok(Uri uri) {
