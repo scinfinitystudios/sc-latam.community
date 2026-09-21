@@ -25,27 +25,3 @@ footer{padding:26px 12px;margin-top:0}footer h3{font-size:13px}footer p{font-siz
   .minecraft-page::after{content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";position:absolute;left:0;right:0;bottom:12px;text-align:center;white-space:pre;color:rgba(255,255,255,.62);font-size:10px;line-height:1.6}
   main:has(.home-hero)::after{content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";display:block;white-space:pre;text-align:center;color:rgba(255,255,255,.62);font-size:10px;line-height:1.6;margin:0 0 28px}
 }
-.events-page,.tournaments-page,.history-page,.minecraft-page,.home-page{
-  background-size:100% auto!important;
-  background-position:top center!important;
-  background-repeat:no-repeat!important;
-  background-attachment:scroll!important;
-}
-.home-page{min-height:calc(100vh - 82px)!important;background-image:url("assets/fondo-inicio-sc.svg")!important;background-size:100% auto!important;background-position:top center!important;background-repeat:repeat-y!important;background-attachment:scroll!important;background-color:#020817!important;}
-.events-page{background-image:url("assets/fondo-eventos-sc.svg")!important;background-color:#0b0702!important;}
-.tournaments-page{background-image:url("assets/fondo-torneos-sc.svg")!important;background-color:#06020c!important;}
-.history-page{background-image:url("assets/fondo-historial-sc.svg")!important;background-color:#030511!important;}
-.minecraft-page{background-image:url("assets/fondo-servidores-sc.svg")!important;background-color:#020817!important;}
-
-@media(max-width:768px){
-  .home-page{
-    min-height:calc(100vh - 82px);
-    background-image:url("assets/fondo-inicio-sc.svg")!important;
-    background-size:118% auto!important;
-    background-position:top center!important;
-    background-repeat:repeat-y!important;
-    background-attachment:scroll!important;
-    background-color:#020817!important;
-  }
-  .home-page .home-hero{background:transparent!important;}
-}
