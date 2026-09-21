@@ -92,7 +92,7 @@ footer p{margin:0;line-height:1.5;}
 
 /* INICIO — fondo único */
 .home-page{
-  background:#020817 url("assets/fondo-inicio-sc.svg") top center / 100% auto no-repeat!important;
+  background:#020817 url("assets/fondo-inicio-sc.jpg") top center / 100% auto no-repeat!important;
 }
 @media(max-width:768px){
   .home-page{
@@ -107,7 +107,7 @@ body{background:#020817}
 header{background:rgba(2,7,20,.82);border-bottom:1px solid rgba(74,145,255,.22);box-shadow:0 8px 30px rgba(0,0,0,.25)}
 .logo img{filter:drop-shadow(0 0 9px rgba(35,136,255,.35))}
 .btn-header{border:1px solid rgba(111,180,255,.35);background:linear-gradient(135deg,#1465ff,#2494ff);border-radius:999px;padding:11px 18px}
-.home-page{position:relative;isolation:isolate;background-color:#020817!important;background-image:url('assets/fondo-inicio-sc.svg')!important;background-position:top center!important;background-size:100% auto!important;background-repeat:no-repeat!important}
+.home-page{position:relative;isolation:isolate;background-color:#020817!important;background-image:url('assets/fondo-inicio-sc.jpg')!important;background-position:top center!important;background-size:100% auto!important;background-repeat:no-repeat!important}
 .home-page::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 18%,rgba(28,112,255,.14),transparent 34%),linear-gradient(180deg,transparent 0 55%,rgba(2,8,23,.72) 88%,#020817 100%)}
 .home-hero{min-height:540px;padding-top:58px}
 .home-hero::after{height:190px;background:linear-gradient(transparent,#020817)}
