@@ -199,3 +199,38 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .home-card p{font-size:8px!important;min-height:58px!important}
   .mobile-bottom-nav{height:65px!important}
 }
+
+
+/* ===== Iconos y tarjetas: lenguaje visual de app ===== */
+@media(max-width:768px){
+  .home-card .icon{
+    width:48px!important;
+    height:48px!important;
+    display:grid!important;
+    place-items:center!important;
+    margin:0 auto 8px!important;
+    border-radius:14px!important;
+    background:rgba(35,136,255,.09)!important;
+    border:1px solid rgba(74,145,255,.18)!important;
+    filter:none!important;
+  }
+  .tournament-card .icon{background:rgba(139,92,246,.12)!important;border-color:rgba(139,92,246,.25)!important}
+  .register-card .icon{background:rgba(35,136,255,.12)!important;border-color:rgba(35,136,255,.25)!important}
+  .mode-card .icon{background:rgba(35,192,107,.10)!important;border-color:rgba(35,192,107,.22)!important}
+  .participation-card .icon{background:rgba(217,165,43,.10)!important;border-color:rgba(217,165,43,.22)!important}
+
+  .home-card{
+    position:relative!important;
+    overflow:hidden!important;
+  }
+  .home-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:18%;
+    right:18%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(74,145,255,.65),transparent);
+  }
+  .home-card p{color:#b8c2da!important}
+}
