@@ -39,3 +39,17 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
 .home-panel{border-radius:12px!important;background:linear-gradient(145deg,rgba(8,17,43,.92),rgba(3,8,24,.96))!important}
 .card-action,.panel-action{border-radius:999px!important}
 }
+
+/* ===== Navegación móvil estilo app ===== */
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+  body{padding-bottom:76px!important}
+  header nav{display:none!important}
+  .mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));height:64px;z-index:3000;padding:6px 4px;border:1px solid rgba(74,145,255,.24);border-radius:20px;background:rgba(3,9,27,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 35px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05)}
+  .mobile-bottom-nav a{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px!important;padding:4px 2px!important;border:0!important;background:transparent!important;color:rgba(220,228,248,.65)!important;text-decoration:none!important;font-size:9px!important;font-weight:700!important;white-space:nowrap!important;transition:.2s}
+  .mobile-bottom-nav a::after{display:none!important}
+  .mobile-bottom-nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .mobile-bottom-nav a.active{color:#32a0ff!important;text-shadow:0 0 12px rgba(50,160,255,.5)}
+  .mobile-bottom-nav a.active svg{filter:drop-shadow(0 0 7px rgba(50,160,255,.7));stroke-width:2.1}
+  .mobile-bottom-nav a:active{transform:scale(.92)}
+}
