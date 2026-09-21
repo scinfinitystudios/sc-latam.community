@@ -58,3 +58,16 @@ footer{padding:26px 12px;margin-top:0}footer h3{font-size:13px}footer p{font-siz
 .tournaments-page{background-image:url("assets/fondo-torneos-sc.svg")!important;background-color:#06020c!important;}
 .history-page{background-image:url("assets/fondo-historial-sc.svg")!important;background-color:#030511!important;}
 .minecraft-page{background-image:url("assets/fondo-servidores-sc.svg")!important;background-color:#020817!important;}
+
+@media(max-width:768px){
+  .home-page{
+    min-height:calc(100vh - 82px);
+    background-image:url("assets/fondo-inicio-sc.svg")!important;
+    background-size:100% auto!important;
+    background-position:top center!important;
+    background-repeat:repeat-y!important;
+    background-attachment:scroll!important;
+    background-color:#020817!important;
+  }
+  .home-page .home-hero{background:transparent!important;}
+}
