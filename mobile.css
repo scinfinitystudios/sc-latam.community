@@ -12,41 +12,23 @@ footer{padding:26px 12px;margin-top:0}footer h3{font-size:13px}footer p{font-siz
 @media(min-width:769px){.home-title{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;text-align:center}.home-title h1,.home-title h2{display:none!important}.mobile-sc-logo{display:block;width:min(46vw,610px);height:auto;margin:-28px auto -8px;position:relative;left:-1%;filter:drop-shadow(0 0 16px rgba(48,102,255,.22))}}
 @media(max-width:390px){header{padding-left:9px;padding-right:9px}.logo span{font-size:10px}.logo img{height:31px}.btn-header{font-size:9px;padding:9px 8px}nav{gap:12px}nav a{font-size:9px}.mobile-sc-logo{width:75vw;max-width:390px;margin:-10px auto 0;left:-1.5%}.home-slogan{font-size:15px;margin-top:7px}.home-cards{padding-left:6px;padding-right:6px;gap:5px}.home-card{padding-left:4px;padding-right:4px;min-height:218px}.home-card h2{font-size:10px}.home-card p{font-size:8px}.card-action{font-size:7px}.home-bottom{padding-left:6px;padding-right:6px;gap:6px}.home-panel{padding-left:5px;padding-right:5px}.champions-title h2,.social-title h2{font-size:9px!important}.champion-title-icon,.social-share-icon{width:16px!important;height:16px!important;flex-basis:16px}.champion-title-line,.social-title-line{display:none}.brand-name{font-size:9px!important}.social-brand svg{width:20px!important;height:20px!important}.youtube-logo{width:23px;height:17px;font-size:8px!important}.social-coming{font-size:6px!important}}
 
-/* Escritorio: copyright uniforme en todas las secciones, tomando Servidores como referencia. */
 @media(min-width:769px){
   footer{display:none!important}
   .events-page::after,.tournaments-page::after,.history-page::after,.minecraft-page::after,main:has(.home-hero)::after{
     content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";
-    display:block;
-    white-space:pre;
-    text-align:center;
-    color:rgba(255,255,255,.62);
-    font-size:13px;
-    line-height:1.6;
-    margin:48px 0 28px;
-    position:static;
-    left:auto;
-    right:auto;
-    bottom:auto;
+    display:block;white-space:pre;text-align:center;color:rgba(255,255,255,.62);font-size:13px;line-height:1.6;margin:48px 0 28px;position:static;left:auto;right:auto;bottom:auto;
   }
 }
-
-/* Móvil mantiene el copyright compacto dentro de cada sección. */
 @media(max-width:768px){
   footer{display:none!important}
   .events-page::after,.tournaments-page::after,.history-page::after{content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";display:block;white-space:pre;text-align:center;color:rgba(255,255,255,.62);font-size:10px;line-height:1.6;margin-top:28px}
   .minecraft-page::after{content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";position:absolute;left:0;right:0;bottom:12px;text-align:center;white-space:pre;color:rgba(255,255,255,.62);font-size:10px;line-height:1.6}
   main:has(.home-hero)::after{content:"Todos los derechos reservados.\A© Copyright 2026. SC - Infinity Studios, Inc.";display:block;white-space:pre;text-align:center;color:rgba(255,255,255,.62);font-size:10px;line-height:1.6;margin:0 0 28px}
 }
-
-/* Inicio: fondo de página completo en escritorio, siguiendo Servidores. */
 @media(min-width:769px){
   main:has(.home-hero){background-image:url("assets/fondo-inicio-sc.svg")!important;background-size:100% auto!important;background-position:top center!important;background-repeat:no-repeat!important;background-color:#020817!important}
   main:has(.home-hero) .home-hero{background-image:none!important;background-color:transparent!important}
 }
-
-
-/* Fondos de secciones: mismo comportamiento visual que Servidores. */
 .events-page,.tournaments-page,.history-page,.minecraft-page,.home-page{
   background-size:100% auto!important;
   background-position:top center!important;
@@ -63,7 +45,7 @@ footer{padding:26px 12px;margin-top:0}footer h3{font-size:13px}footer p{font-siz
   .home-page{
     min-height:calc(100vh - 82px);
     background-image:url("assets/fondo-inicio-sc.svg")!important;
-    background-size:100% auto!important;
+    background-size:118% auto!important;
     background-position:top center!important;
     background-repeat:repeat-y!important;
     background-attachment:scroll!important;
