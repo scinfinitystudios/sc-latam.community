@@ -53,7 +53,7 @@ footer{padding:26px 12px;margin-top:0}footer h3{font-size:13px}footer p{font-siz
   background-repeat:no-repeat!important;
   background-attachment:scroll!important;
 }
-.home-page{background-image:url("assets/fondo-inicio-sc.svg")!important;background-color:#020817!important;}
+.home-page{min-height:calc(100vh - 82px)!important;background-image:url("assets/fondo-inicio-sc.svg")!important;background-size:100% auto!important;background-position:top center!important;background-repeat:repeat-y!important;background-attachment:scroll!important;background-color:#020817!important;}
 .events-page{background-image:url("assets/fondo-eventos-sc.svg")!important;background-color:#0b0702!important;}
 .tournaments-page{background-image:url("assets/fondo-torneos-sc.svg")!important;background-color:#06020c!important;}
 .history-page{background-image:url("assets/fondo-historial-sc.svg")!important;background-color:#030511!important;}
