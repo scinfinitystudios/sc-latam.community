@@ -26,26 +26,7 @@ function configurarNavegacionPaginas() {
   if (botonHistorial) botonHistorial.href = "historial.html";
 }
 
-function configurarFondos() {
-  const inicio = document.querySelector(".home-hero");
-  const registro = document.querySelector(".registration-page");
-
-  if (inicio) {
-    inicio.style.backgroundImage = 'url("assets/fondo-inicio-sc.svg")';
-    inicio.style.backgroundSize = "cover";
-    inicio.style.backgroundPosition = "center";
-    inicio.style.backgroundRepeat = "no-repeat";
-  }
-
-  if (registro) {
-    registro.style.backgroundImage = 'url("assets/fondo-registro-sc.svg")';
-    registro.style.backgroundSize = "cover";
-    registro.style.backgroundPosition = "center";
-    registro.style.backgroundRepeat = "no-repeat";
-  }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   configurarNavegacionPaginas();
-  configurarFondos();
 });
