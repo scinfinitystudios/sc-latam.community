@@ -53,3 +53,149 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .mobile-bottom-nav a.active svg{filter:drop-shadow(0 0 7px rgba(50,160,255,.7));stroke-width:2.1}
   .mobile-bottom-nav a:active{transform:scale(.92)}
 }
+
+
+/* ===== SC LATAM APP MODE — dashboard móvil ===== */
+@media(max-width:768px){
+  body{
+    background:#020817!important;
+    padding-bottom:88px!important;
+  }
+
+  header{
+    min-height:58px;
+    padding:9px 12px!important;
+    border-bottom:1px solid rgba(62,135,255,.2)!important;
+  }
+
+  .logo img{height:32px!important;border-radius:7px}
+  .logo span{font-size:11px!important;letter-spacing:.7px!important}
+  .btn-header{
+    padding:9px 12px!important;
+    font-size:10px!important;
+    box-shadow:0 0 16px rgba(30,94,255,.22)!important;
+  }
+
+  /* Inicio: más parecido a un dashboard de app */
+  .home-hero{
+    min-height:385px!important;
+    padding:18px 16px 72px!important;
+  }
+  .home-hero-content{
+    padding-top:12px!important;
+  }
+  .mobile-sc-logo{
+    width:62vw!important;
+    max-width:300px!important;
+    margin:0 auto 2px!important;
+  }
+  .home-slogan{
+    margin-top:10px!important;
+    font-size:15px!important;
+    line-height:1.35!important;
+    letter-spacing:.4px!important;
+  }
+
+  .home-cards{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+    margin-top:-34px!important;
+    padding:0 12px 18px!important;
+  }
+  .home-card{
+    min-height:190px!important;
+    padding:15px 9px 11px!important;
+    border-radius:15px!important;
+    justify-content:flex-start!important;
+  }
+  .home-card .icon{
+    font-size:25px!important;
+    margin-bottom:7px!important;
+  }
+  .home-card h2{
+    font-size:12px!important;
+    letter-spacing:.3px!important;
+  }
+  .home-card p{
+    font-size:9px!important;
+    line-height:1.38!important;
+    min-height:62px!important;
+    margin-bottom:8px!important;
+  }
+  .card-action{
+    font-size:8px!important;
+    padding:8px 4px!important;
+    border-radius:999px!important;
+  }
+
+  .home-bottom{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    padding:0 12px 18px!important;
+  }
+  .home-panel{
+    padding:15px 11px!important;
+    border-radius:15px!important;
+  }
+  .champions-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .champion-card{
+    padding:10px 3px!important;
+    border-radius:9px!important;
+  }
+  .champion-card h3{font-size:8px!important}
+  .champion-card p{font-size:7px!important}
+  .champion-card strong{font-size:8px!important}
+  .panel-action{
+    width:100%!important;
+    margin-top:11px!important;
+    border-radius:999px!important;
+  }
+  .social-box{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  /* Barra inferior: apariencia nativa de app */
+  .mobile-bottom-nav{
+    left:8px!important;
+    right:8px!important;
+    bottom:max(8px,env(safe-area-inset-bottom))!important;
+    height:68px!important;
+    border-radius:21px!important;
+    background:rgba(3,8,25,.91)!important;
+    border-color:rgba(63,137,255,.27)!important;
+    box-shadow:0 14px 40px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  }
+  .mobile-bottom-nav a{
+    font-size:8px!important;
+    gap:4px!important;
+    border-radius:14px!important;
+  }
+  .mobile-bottom-nav a.active{
+    background:rgba(35,136,255,.10)!important;
+    color:#38a0ff!important;
+  }
+  .mobile-bottom-nav a.active::before{
+    content:"";
+    position:absolute;
+    top:3px;
+    width:24px;
+    height:2px;
+    border-radius:999px;
+    background:#2f94ff;
+    box-shadow:0 0 10px rgba(47,148,255,.9);
+  }
+  .mobile-bottom-nav a{position:relative}
+}
+
+/* Teléfonos muy estrechos */
+@media(max-width:390px){
+  .home-hero{min-height:360px!important}
+  .mobile-sc-logo{width:65vw!important}
+  .home-slogan{font-size:14px!important}
+  .home-card{min-height:182px!important}
+  .home-card p{font-size:8px!important;min-height:58px!important}
+  .mobile-bottom-nav{height:65px!important}
+}
