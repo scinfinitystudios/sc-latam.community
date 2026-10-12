@@ -294,3 +294,61 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .home-card{padding:14px 10px!important}
   .home-card .card-action{font-size:7px!important}
 }
+
+
+/* ===== Servidores: corregir layout de escritorio y pie de página ===== */
+@media (min-width:769px){
+  .minecraft-page{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-height:calc(100vh - 76px)!important;
+    padding:48px clamp(24px,5vw,80px) 30px!important;
+    overflow:visible!important;
+  }
+  .minecraft-shell{
+    flex:0 0 auto!important;
+    width:min(1120px,100%)!important;
+    max-width:1120px!important;
+    margin:0 auto!important;
+  }
+  .minecraft-cards{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:18px!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:24px auto 0!important;
+  }
+  .minecraft-btn{
+    display:flex!important;
+    min-width:0!important;
+    min-height:112px!important;
+    align-items:center!important;
+    gap:14px!important;
+    padding:18px!important;
+  }
+  .minecraft-info{min-width:0!important;flex:1 1 auto!important}
+  .minecraft-info h2{font-size:15px!important;white-space:normal!important}
+  .minecraft-info p{font-size:12px!important}
+  .minecraft-page::after{
+    position:static!important;
+    display:block!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    margin:32px auto 0!important;
+    text-align:center!important;
+    white-space:pre!important;
+    font-size:12px!important;
+    line-height:1.6!important;
+  }
+}
+@media (min-width:769px) and (max-width:1000px){
+  .minecraft-cards{gap:10px!important}
+  .minecraft-btn{gap:9px!important;padding:13px!important}
+  .minecraft-icon{width:40px!important;height:40px!important;flex-basis:40px!important;font-size:21px!important}
+  .minecraft-info h2{font-size:12px!important}
+  .minecraft-info p{font-size:10px!important}
+}
