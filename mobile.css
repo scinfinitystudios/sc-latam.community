@@ -234,3 +234,7 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   }
   .home-card p{color:#b8c2da!important}
 }
+
+
+/* Ocultar la tarjeta independiente del servidor en Inicio; conservar el acceso en Actividad reciente y la navegación. */
+.server-status-panel{display:none!important}
