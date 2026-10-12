@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SC Admin | LATAM Community</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <a class="brand" href="index.html" aria-label="Volver a SC LATAM Community">
+      <img src="logo.png" alt="">
+      <span>SC <b>ADMIN</b><small>LATAM COMMUNITY</small></span>
+    </a>
+
+    <section id="loginCard" class="panel" aria-labelledby="pageTitle">
+      <div class="eyebrow">CENTRO DE CONTROL</div>
+      <h1 id="pageTitle">Acceso administrativo</h1>
+      <p class="muted">Inicia sesión con una cuenta autorizada para administrar SC LATAM Community.</p>
+      <form id="loginForm">
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" autocomplete="username" required maxlength="254">
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required minlength="8">
+        <button id="loginButton" type="submit">Iniciar sesión</button>
+      </form>
+      <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+      <p class="security-note"><span aria-hidden="true">🔒</span> Acceso restringido. No te registres aquí: el administrador crea las cuentas desde Supabase.</p>
+    </section>
+
+    <section id="dashboard" class="panel dashboard" hidden aria-labelledby="dashboardTitle">
+      <div class="dashboard-top">
+        <div><div class="eyebrow">SESIÓN VERIFICADA</div><h1 id="dashboardTitle">Panel SC</h1><p id="signedInAs" class="muted"></p></div>
+        <button id="logoutButton" class="secondary" type="button">Cerrar sesión</button>
+      </div>
+      <div class="status"><span class="status-dot"></span><span>Identidad verificada</span><span class="status-label">ADMIN</span></div>
+      <h2>Módulos de administración</h2>
+      <div class="module-grid">
+        <article class="module"><span>👥</span><h3>Miembros</h3><p>Inscripciones y participantes.</p><small>Preparado para conectar</small></article>
+        <article class="module"><span>🏆</span><h3>Torneos</h3><p>Competencias, fechas y resultados.</p><small>Preparado para conectar</small></article>
+        <article class="module"><span>📅</span><h3>Eventos</h3><p>Publicaciones y actividades.</p><small>Preparado para conectar</small></article>
+        <article class="module"><span>🖥️</span><h3>Servidores</h3><p>Información pública y estado.</p><small>Preparado para conectar</small></article>
+        <article class="module"><span>📚</span><h3>Historial</h3><p>Campeones y resultados finales.</p><small>Preparado para conectar</small></article>
+        <article class="module"><span>🛡️</span><h3>Seguridad</h3><p>Permisos y controles de acceso.</p><small>Rol comprobado desde la base de datos</small></article>
+      </div>
+      <p id="dashboardMessage" class="message" role="status" aria-live="polite"></p>
+    </section>
+    <footer>© SC - Infinity Studios, Inc. <a href="index.html">Volver al sitio</a></footer>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
