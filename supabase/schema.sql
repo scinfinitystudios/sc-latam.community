@@ -9,6 +9,27 @@ create table if not exists public.profiles (
   created_at timestamptz not null default now()
 );
 
+-- Automatically create a least-privilege member profile after public signup.
+-- Admin roles are never accepted from user metadata; promotion to admin stays manual.
+create or replace function public.handle_sc_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $
+begin
+  insert into public.profiles (id, email, role)
+  values (new.id, new.email, 'member')
+  on conflict (id) do nothing;
+  return new;
+end;
+$;
+
+drop trigger if exists on_auth_user_created_sc on auth.users;
+create trigger on_auth_user_created_sc
+after insert on auth.users
+for each row execute procedure public.handle_sc_new_user();
+
 create table if not exists public.members (
   id uuid primary key default gen_random_uuid(),
   full_name text not null,
