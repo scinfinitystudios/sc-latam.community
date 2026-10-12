@@ -238,3 +238,59 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
 
 /* Ocultar la tarjeta independiente del servidor en Inicio; conservar el acceso en Actividad reciente y la navegación. */
 .server-status-panel{display:none!important}
+
+
+/* SC LATAM responsive polish — takes precedence over legacy mobile rules */
+@media(max-width:768px){
+  body{background:#080d18!important;color:#f3f6fc}
+  header{background:rgba(8,13,24,.97)!important;border-bottom:1px solid rgba(157,178,211,.16)!important;box-shadow:0 8px 24px rgba(0,0,0,.16)!important}
+  header nav{justify-content:flex-start!important;overflow-x:auto!important;scrollbar-width:none!important;padding:4px 2px 7px!important}
+  header nav::-webkit-scrollbar{display:none}
+  header nav a{font-size:11px!important;color:#aebbd0!important}
+  header nav a:hover{color:#fff!important}
+  .home-hero{min-height:390px!important;align-items:center!important;justify-content:center!important;padding:44px 18px 36px!important;background:radial-gradient(ellipse at 50% 28%,rgba(49,103,190,.16),transparent 58%),#080d18!important}
+  .home-hero-content{padding:0!important}
+  .home-title h1{font-size:clamp(76px,22vw,112px)!important;line-height:.9!important}
+  .home-title h2{font-size:clamp(13px,4vw,17px)!important;letter-spacing:.13em!important}
+  .home-slogan{font-size:10px!important;letter-spacing:.1em!important;line-height:1.8!important;margin-top:21px!important}
+  .app-dashboard{width:calc(100% - 28px)!important;margin:0 auto 30px!important;padding:17px!important;border:1px solid rgba(157,178,211,.16)!important;border-radius:17px!important;background:linear-gradient(145deg,#101827,#0a111d)!important}
+  .dashboard-heading{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:12px!important;margin-bottom:17px!important}
+  .dashboard-heading h2{font-size:23px!important}
+  .featured-tournament{padding:20px 17px!important;border-radius:14px!important}
+  .featured-mark{display:none!important}
+  .featured-copy h2{font-size:27px!important}
+  .featured-copy p{font-size:12px!important}
+  .featured-meta{gap:6px!important}
+  .featured-meta span{font-size:9px!important}
+  .dashboard-btn{width:100%!important;justify-content:space-between!important}
+  .activity-list{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+  .activity-item{padding:12px!important;border-radius:11px!important}
+  .home-cards{width:calc(100% - 28px)!important;margin:0 auto 30px!important;padding:0!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .home-card{min-height:0!important;padding:16px 12px!important;border:1px solid rgba(157,178,211,.16)!important;border-radius:14px!important;background:#101827!important}
+  .home-card .icon{width:38px!important;height:38px!important;margin:0 0 12px!important;font-size:18px!important;border-radius:11px!important}
+  .home-card h2{font-size:11px!important;margin:0 0 9px!important;letter-spacing:.04em!important}
+  .home-card p{font-size:10px!important;line-height:1.6!important;min-height:0!important;margin:0 0 13px!important;color:#9ba9bf!important}
+  .home-card .card-action{width:100%!important;min-height:35px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:7px 5px!important;border-radius:8px!important;font-size:8px!important;white-space:normal!important}
+  .home-bottom{width:calc(100% - 28px)!important;margin:0 auto 34px!important;padding:0!important;grid-template-columns:1fr!important;gap:12px!important}
+  .home-panel{padding:17px 13px!important;border:1px solid rgba(157,178,211,.16)!important;border-radius:15px!important;background:#101827!important}
+  .panel-title{gap:7px!important;margin-bottom:18px!important}
+  .panel-title h2{font-size:10px!important;letter-spacing:.02em!important}
+  .champions-grid{gap:6px!important}
+  .champion-card{padding:13px 5px!important;background:rgba(255,255,255,.018)!important;border:1px solid rgba(157,178,211,.12)!important}
+  .champion-card h3{font-size:9px!important}
+  .champion-card p{font-size:8px!important}
+  .champion-card strong{font-size:10px!important}
+  .social-card{border:1px solid rgba(157,178,211,.16)!important;background:rgba(255,255,255,.02)!important}
+  .mobile-bottom-nav{background:rgba(8,13,24,.96)!important;border:1px solid rgba(110,164,255,.2)!important;box-shadow:0 12px 32px rgba(0,0,0,.38)!important}
+  .mobile-bottom-nav a.active{background:rgba(110,164,255,.1)!important;color:#8bb5ff!important}
+  .mobile-bottom-nav a.active::before{background:#6ea4ff!important;box-shadow:none!important}
+}
+@media(max-width:390px){
+  .home-hero{min-height:350px!important}
+  .home-title h1{font-size:clamp(70px,22vw,92px)!important}
+  .home-title h2{font-size:12px!important}
+  .home-slogan{font-size:9px!important}
+  .home-cards{gap:8px!important}
+  .home-card{padding:14px 10px!important}
+  .home-card .card-action{font-size:7px!important}
+}
