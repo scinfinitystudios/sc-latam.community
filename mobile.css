@@ -352,3 +352,16 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .minecraft-info h2{font-size:12px!important}
   .minecraft-info p{font-size:10px!important}
 }
+
+
+/* Ajuste fino: el título de Servidores comienza arriba, como en las demás páginas */
+@media (min-width:769px){
+  .minecraft-page{
+    justify-content:flex-start!important;
+    padding-top:26px!important;
+    padding-bottom:34px!important;
+  }
+  .minecraft-shell{margin-top:0!important}
+  .minecraft-sc-logo-wrap img{width:clamp(110px,10vw,150px)!important}
+  .minecraft-word{margin-top:10px!important}
+}
