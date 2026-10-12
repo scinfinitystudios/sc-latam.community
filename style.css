@@ -156,3 +156,9 @@ header{background:rgba(2,7,20,.82);border-bottom:1px solid rgba(74,145,255,.22);
  .dashboard-btn{font-size:9px;padding:9px 12px}.dashboard-grid{grid-template-columns:1fr;gap:9px;margin-top:9px}.dashboard-panel{padding:14px;border-radius:15px}.dashboard-panel-title{margin-bottom:10px}.dashboard-panel-title h3{font-size:11px}.activity-item{grid-template-columns:34px 1fr 14px;padding:9px}.activity-icon{width:30px;height:30px}.activity-item strong{font-size:10px}.activity-item small{font-size:8px}.server-stats{margin-bottom:10px}.server-stats div{padding:8px 4px}.server-stats small{font-size:7px}.server-stats strong{font-size:9px}
 }
 @media(max-width:390px){.dashboard-heading h2{font-size:18px}.dashboard-live{display:none}.featured-mark{width:68px;height:68px;font-size:18px}.featured-copy h2{font-size:24px}}
+
+
+/* SC LATAM: quitar fondos decorativos de todas las secciones excepto Registro */
+body:not(:has(.registration-page)){background:#020817!important;background-image:none!important}
+.events-page,.tournaments-page,.history-page,.community-page,.home-page,main,section:not(.registration-page){background-image:none!important}
+.events-page::before,.events-page::after,.tournaments-page::before,.tournaments-page::after,.history-page::before,.history-page::after,.community-page::before,.community-page::after{background-image:none!important}
