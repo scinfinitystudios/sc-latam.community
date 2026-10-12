@@ -158,7 +158,9 @@ header{background:rgba(2,7,20,.82);border-bottom:1px solid rgba(74,145,255,.22);
 @media(max-width:390px){.dashboard-heading h2{font-size:18px}.dashboard-live{display:none}.featured-mark{width:68px;height:68px;font-size:18px}.featured-copy h2{font-size:24px}}
 
 
-/* SC LATAM: quitar fondos decorativos de todas las secciones excepto Registro */
-body:not(:has(.registration-page)){background:#020817!important;background-image:none!important}
-.events-page,.tournaments-page,.history-page,.community-page,.home-page,main,section:not(.registration-page){background-image:none!important}
-.events-page::before,.events-page::after,.tournaments-page::before,.tournaments-page::after,.history-page::before,.history-page::after,.community-page::before,.community-page::after{background-image:none!important}
+/* ===== Fondos globales ordenados: solo Registro conserva su imagen ===== */
+html,body{background-color:#020817!important;background-image:none!important}
+.home-page,.home-hero,.events-page,.tournaments-page,.history-page,.minecraft-page,.community-page,main>section:not(.registration-page){background-color:#020817!important;background-image:none!important;background-size:auto!important;background-position:initial!important;background-repeat:initial!important}
+.home-page::before,.home-page::after,.home-hero::before,.home-hero::after,.events-page::before,.events-page::after,.tournaments-page::before,.tournaments-page::after,.history-page::before,.history-page::after,.minecraft-page::before,.minecraft-page::after,.community-page::before,.community-page::after{background-image:none!important}
+/* Registro mantiene assets/fondo-registro-sc.jpg definido en registration.css */
+.registration-page{background-image:url("assets/fondo-registro-sc.jpg")!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
