@@ -180,6 +180,20 @@ create policy "audit_admin_insert" on public.admin_audit_log
 for insert to authenticated
 with check ((select public.is_sc_admin()) and actor_id = (select auth.uid()));
 
+-- SQL privileges complement RLS; RLS policies still decide which rows are accessible.
+grant select on public.profiles to authenticated;
+grant insert, update, delete on public.profiles to authenticated;
+grant select, insert, update, delete on public.members to authenticated;
+grant select on public.tournaments to anon, authenticated;
+grant insert, update, delete on public.tournaments to authenticated;
+grant select on public.events to anon, authenticated;
+grant insert, update, delete on public.events to authenticated;
+grant select on public.servers to anon, authenticated;
+grant insert, update, delete on public.servers to authenticated;
+grant select on public.champions to anon, authenticated;
+grant insert, update, delete on public.champions to authenticated;
+grant select, insert on public.admin_audit_log to authenticated;
+
 -- Indexes for common admin queries.
 create index if not exists members_created_at_idx on public.members (created_at desc);
 create index if not exists members_status_idx on public.members (status);
