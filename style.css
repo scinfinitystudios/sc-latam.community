@@ -191,3 +191,122 @@ footer{background:var(--sc-bg)!important;border-top:1px solid var(--sc-border)!i
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 /* El fondo gráfico se reserva exclusivamente para la página de registro. */
 .registration-page{background-image:url("assets/fondo-registro-sc.jpg")!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+
+
+/* SC LATAM — polish pass: visual consistency across every page */
+:root{
+  color-scheme:dark;
+  --sc-bg:#080d18;
+  --sc-surface:#101827;
+  --sc-surface-raised:#141f31;
+  --sc-border:rgba(157,178,211,.16);
+  --sc-text:#f3f6fc;
+  --sc-muted:#9ba9bf;
+  --sc-blue:#6ea4ff;
+  --sc-blue-strong:#397df4;
+  --sc-radius:18px;
+}
+html{scroll-padding-top:90px;scroll-behavior:smooth}
+body{background:var(--sc-bg);color:var(--sc-text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(83,143,255,.35);color:#fff}
+a{transition:color .18s ease,background-color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+header{position:relative;z-index:20;min-height:76px;padding:14px clamp(18px,4vw,64px);gap:24px;background:rgba(8,13,24,.94);border-bottom:1px solid var(--sc-border);box-shadow:0 8px 32px rgba(0,0,0,.12);backdrop-filter:blur(18px)}
+header .logo{gap:12px;min-width:0}
+header .logo img{width:38px;height:38px;object-fit:contain}
+header .logo span{font-size:12px;letter-spacing:.13em;font-weight:800;color:#e9effb}
+header nav{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,28px)}
+header nav a{position:relative;color:#aebbd0;text-decoration:none;font-size:13px;font-weight:650;padding:10px 0}
+header nav a:hover,header nav a[aria-current="page"]{color:#fff}
+header nav a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:2px;background:var(--sc-blue)}
+.btn-header{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 17px;border:1px solid rgba(110,164,255,.38);border-radius:10px;background:rgba(57,125,244,.13);color:#dce9ff;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.btn-header:hover{background:var(--sc-blue-strong);border-color:var(--sc-blue-strong);color:white;transform:translateY(-1px)}
+main,.minecraft-page{isolation:isolate}
+footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 22px;padding:24px 18px 30px;border-top:1px solid var(--sc-border);background:#070b14;color:#77869e;text-align:center}
+footer p{margin:0;font-size:11px;letter-spacing:.015em}
+.events-page,.tournaments-page,.history-page,.minecraft-page{background:var(--sc-bg)!important;background-image:none!important;color:var(--sc-text);min-height:calc(100vh - 140px)}
+.events-shell,.tournaments-shell,.history-shell,.minecraft-shell{width:min(1120px,100%);margin-inline:auto}
+.events-hero,.tournaments-hero,.history-hero{padding:clamp(56px,8vw,100px) 20px 42px;text-align:left;border-bottom:1px solid var(--sc-border);margin-bottom:34px}
+.events-hero h1,.tournaments-hero h1,.history-hero h1{font-size:clamp(38px,6vw,68px)!important;line-height:1.05;letter-spacing:-.055em;font-weight:850;color:#f5f8ff;margin:0 0 16px;text-shadow:none}
+.events-hero p,.tournaments-hero p,.history-hero p{max-width:620px;margin:0;color:var(--sc-muted);font-size:clamp(14px,1.5vw,17px);line-height:1.75}
+.events-kicker,.tournaments-kicker,.history-kicker{color:var(--sc-blue)!important;font-size:11px!important;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:15px}
+.events-section,.tournament-section,.history-section{margin:0 0 36px}
+.events-heading,.section-heading,.history-heading{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.events-heading h2,.section-heading h2,.history-heading h2{font-size:clamp(15px,2vw,19px)!important;line-height:1.3;letter-spacing:.015em;font-weight:800;color:#eaf0fb;margin:0}
+.events-heading .dot,.section-heading .dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--sc-blue);box-shadow:0 0 0 4px rgba(110,164,255,.10)}
+.history-heading .icon{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(110,164,255,.1);font-size:17px}
+.empty-events,.empty-state,.empty-history{border:1px solid var(--sc-border)!important;border-radius:14px!important;padding:24px!important;background:var(--sc-surface)!important;color:var(--sc-muted)!important;text-align:left!important;font-size:13px;line-height:1.7}
+.events-grid,.tournament-grid,.champion-grid{gap:16px!important}
+.event-card,.tournament-item,.champion-record,.rank-card,.minecraft-btn{border:1px solid var(--sc-border)!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(20,31,49,.98),rgba(13,21,35,.98))!important;box-shadow:0 12px 32px rgba(0,0,0,.12)!important;overflow:hidden}
+.event-card:hover,.tournament-item:hover,.champion-record:hover,.rank-card:hover,.minecraft-btn:hover{border-color:rgba(110,164,255,.48)!important;transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.22)!important}
+.event-content h3,.tournament-content h3,.champion-record h3{color:#f2f6ff!important}
+.event-content p,.rank-info span{color:var(--sc-muted)!important}
+.event-status{color:var(--sc-blue)!important;letter-spacing:.12em}
+.tournament-prize{color:#dce8ff!important}
+.champion-record{padding:24px 18px!important;text-align:center}
+.champion-record .trophy{margin-bottom:12px}
+.champion-record .edition{color:var(--sc-blue)!important;font-size:10px;letter-spacing:.12em;font-weight:800}
+.rank-card{display:flex!important;align-items:center;gap:16px;text-align:left!important;padding:18px!important}
+.rank-number{color:var(--sc-blue)!important;font-weight:850}
+.rank-info strong{color:#edf3ff!important}
+.page-back,.events-back{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:28px!important;padding:12px 17px!important;min-height:44px;border:1px solid var(--sc-border)!important;border-radius:10px!important;background:var(--sc-surface)!important;color:#dce6f7!important;text-decoration:none;font-size:12px;font-weight:750;letter-spacing:.015em}
+.page-back:hover,.events-back:hover{background:var(--sc-surface-raised)!important;border-color:rgba(110,164,255,.45)!important;color:white!important;transform:translateY(-1px)}
+.minecraft-page{align-items:center;padding:clamp(48px,7vw,90px) 22px!important}
+.minecraft-shell{max-width:880px;text-align:center}
+.minecraft-word{color:#f1f6ff!important;font-weight:900;letter-spacing:.13em}
+.servers-word{color:var(--sc-blue)!important;font-weight:850;letter-spacing:.2em}
+.minecraft-divider{opacity:.65}
+.minecraft-tagline{color:var(--sc-muted)!important;letter-spacing:.06em;font-size:12px}
+.minecraft-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:34px 0 8px}
+.minecraft-btn{display:flex;align-items:center;gap:13px;padding:19px!important;min-height:100px;text-align:left;text-decoration:none;color:var(--sc-text)!important}
+.minecraft-icon{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;border:1px solid var(--sc-border);border-radius:13px;background:rgba(110,164,255,.08);font-size:21px}
+.minecraft-info{min-width:0;flex:1}
+.minecraft-info h2{font-size:14px;color:#f2f6ff;margin:0 0 4px}
+.minecraft-info p{font-size:11px;color:var(--sc-muted);margin:0;line-height:1.5}
+.minecraft-btn .arrow{color:var(--sc-blue);font-size:23px}
+.mobile-bottom-nav{z-index:50}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--sc-blue);outline-offset:4px}
+@media(max-width:900px){
+ header{flex-wrap:wrap;gap:12px 18px}
+ header nav{order:3;width:100%;justify-content:flex-start;overflow-x:auto;padding:2px 0 5px;gap:22px}
+ header nav a{white-space:nowrap}
+ .minecraft-cards{grid-template-columns:1fr;max-width:560px;margin-inline:auto}
+ .minecraft-btn{min-height:82px}
+}
+@media(max-width:600px){
+ header{min-height:64px;padding:11px 16px;gap:10px}
+ header .logo img{width:32px;height:32px}
+ header .logo span{font-size:10px;letter-spacing:.08em}
+ header nav{gap:19px}
+ header nav a{font-size:12px}
+ .btn-header{min-height:36px;padding:0 11px;font-size:9px}
+ .events-page,.tournaments-page,.history-page{padding:0 16px 86px!important}
+ .events-hero,.tournaments-hero,.history-hero{padding:54px 0 28px;margin-bottom:26px}
+ .events-hero h1,.tournaments-hero h1,.history-hero h1{font-size:clamp(36px,11vw,52px)!important;margin-bottom:12px}
+ .events-hero p,.tournaments-hero p,.history-hero p{font-size:13px}
+ .events-section,.tournament-section,.history-section{margin-bottom:28px}
+ .events-grid,.tournament-grid,.champion-grid{gap:10px!important}
+ .event-card,.tournament-item,.champion-record,.rank-card{border-radius:13px!important}
+ .event-content{padding:13px 11px!important}
+ .event-content h3{font-size:12px!important;line-height:1.4}
+ .event-content p{font-size:10px!important}
+ .event-status{font-size:9px!important}
+ .tournament-item{min-height:240px!important}
+ .tournament-content{padding:13px 10px!important}
+ .tournament-prize{font-size:11px!important}
+ .champion-record{padding:16px 8px!important}
+ .champion-record .trophy{font-size:23px!important}
+ .champion-record h3{font-size:12px!important}
+ .champion-record p{font-size:10px!important}
+ .rank-card{padding:13px!important;gap:12px}
+ .rank-number{font-size:20px!important}
+ .rank-info strong{font-size:12px!important}
+ .rank-info span{font-size:10px!important}
+ .empty-events,.empty-state,.empty-history{padding:18px!important;font-size:12px}
+ .page-back,.events-back{width:100%;margin-top:20px!important}
+ .minecraft-page{padding:42px 16px 86px!important}
+ .minecraft-cards{gap:10px;margin-top:24px}
+ .minecraft-btn{padding:15px!important}
+ footer{padding:20px 16px 26px;gap:4px}
+ footer p{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
