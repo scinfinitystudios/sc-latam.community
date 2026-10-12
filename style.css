@@ -410,3 +410,59 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  .social-box{gap:8px}
  .social-card{min-height:95px;padding:10px}
 }
+
+
+/* ===== Servidores: composición de escritorio corregida ===== */
+@media (min-width:769px){
+  .minecraft-page{
+    align-items:center!important;
+    min-height:calc(100vh - 76px)!important;
+    padding:clamp(38px,5vh,64px) clamp(24px,4vw,64px) 54px!important;
+  }
+  .minecraft-shell{
+    width:min(1120px,100%)!important;
+    max-width:1120px!important;
+    margin-inline:auto!important;
+  }
+  .minecraft-title{margin-inline:auto}
+  .minecraft-sc-logo-wrap img{
+    display:block;
+    width:clamp(120px,12vw,174px)!important;
+    max-height:150px;
+    object-fit:contain;
+    margin-inline:auto;
+  }
+  .minecraft-word{margin-top:18px!important;font-size:clamp(28px,3vw,42px)!important;letter-spacing:.16em!important}
+  .servers-word{font-size:clamp(44px,4.5vw,64px)!important;letter-spacing:.19em!important}
+  .minecraft-divider{margin:18px auto 14px!important}
+  .minecraft-tagline{margin-bottom:26px!important;font-size:12px!important}
+  .minecraft-cards{
+    width:100%!important;
+    max-width:none!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:18px!important;
+    margin:28px auto 8px!important;
+  }
+  .minecraft-btn{
+    min-width:0;
+    min-height:116px!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:14px!important;
+    padding:20px!important;
+    text-align:left!important;
+  }
+  .minecraft-icon{width:48px!important;height:48px!important;flex:0 0 48px!important;font-size:24px!important}
+  .minecraft-info{min-width:0;flex:1}
+  .minecraft-info h2{font-size:clamp(13px,1.2vw,16px)!important;white-space:normal!important}
+  .minecraft-info p{font-size:12px!important}
+  .minecraft-btn .arrow{font-size:26px!important;flex:0 0 auto}
+  .minecraft-page .page-back{margin-top:24px!important}
+}
+@media (min-width:769px) and (max-width:900px){
+  .minecraft-cards{gap:10px!important}
+  .minecraft-btn{gap:9px!important;padding:14px!important}
+  .minecraft-icon{width:38px!important;height:38px!important;flex-basis:38px!important;font-size:20px!important}
+  .minecraft-info h2{font-size:12px!important;letter-spacing:0!important}
+  .minecraft-info p{font-size:10px!important}
+}
