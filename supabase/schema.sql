@@ -5,6 +5,8 @@ create extension if not exists pgcrypto;
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text,
+  display_name text check (display_name is null or char_length(display_name) between 2 and 32),
+  avatar_url text,
   role text not null default 'member' check (role in ('member', 'admin')),
   created_at timestamptz not null default now()
 );
@@ -138,6 +140,12 @@ for all to authenticated
 using ((select public.is_sc_admin()))
 with check ((select public.is_sc_admin()));
 
+drop policy if exists "profile_update_self" on public.profiles;
+create policy "profile_update_self" on public.profiles
+for update to authenticated
+using (id = (select auth.uid()))
+with check (id = (select auth.uid()));
+
 -- All member records contain personal information: admins only.
 drop policy if exists "members_admin_only" on public.members;
 create policy "members_admin_only" on public.members
@@ -203,7 +211,9 @@ with check ((select public.is_sc_admin()) and actor_id = (select auth.uid()));
 
 -- SQL privileges complement RLS; RLS policies still decide which rows are accessible.
 grant select on public.profiles to authenticated;
-grant insert, update, delete on public.profiles to authenticated;
+grant insert, delete on public.profiles to authenticated;
+revoke update on public.profiles from authenticated;
+grant update (display_name, avatar_url) on public.profiles to authenticated;
 grant select, insert, update, delete on public.members to authenticated;
 grant select on public.tournaments to anon, authenticated;
 grant insert, update, delete on public.tournaments to authenticated;
@@ -224,3 +234,30 @@ create index if not exists champions_awarded_at_idx on public.champions (awarded
 
 -- IMPORTANT: create the first auth user in Supabase Dashboard, then assign admin role
 -- by running the separate statement in ADMIN_SETUP.md after substituting that user's UUID.
+
+
+-- Public profile-photo bucket. Each signed-in member can manage only their own folder.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('profile-photos', 'profile-photos', true, 3145728, array['image/jpeg','image/png','image/webp'])
+on conflict (id) do update set public = true, file_size_limit = 3145728, allowed_mime_types = array['image/jpeg','image/png','image/webp'];
+
+drop policy if exists "profile_photos_public_read" on storage.objects;
+create policy "profile_photos_public_read" on storage.objects
+for select to anon, authenticated
+using (bucket_id = 'profile-photos');
+
+drop policy if exists "profile_photos_insert_own" on storage.objects;
+create policy "profile_photos_insert_own" on storage.objects
+for insert to authenticated
+with check (bucket_id = 'profile-photos' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+drop policy if exists "profile_photos_update_own" on storage.objects;
+create policy "profile_photos_update_own" on storage.objects
+for update to authenticated
+using (bucket_id = 'profile-photos' and (storage.foldername(name))[1] = (select auth.uid())::text)
+with check (bucket_id = 'profile-photos' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+drop policy if exists "profile_photos_delete_own" on storage.objects;
+create policy "profile_photos_delete_own" on storage.objects
+for delete to authenticated
+using (bucket_id = 'profile-photos' and (storage.foldername(name))[1] = (select auth.uid())::text);
