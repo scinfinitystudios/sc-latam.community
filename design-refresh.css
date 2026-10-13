@@ -303,3 +303,45 @@ footer{
 @media(prefers-reduced-motion:reduce){
   .home-card:hover,.champion-card:hover,.social-card:hover{transform:none}
 }
+
+
+/* SC LATAM — homepage polish v3: clearer hierarchy, CTAs and touch targets */
+.dashboard-heading h2{max-width:720px;line-height:1.12}
+.dashboard-live{white-space:nowrap}
+.activity-item{display:flex;align-items:center;gap:13px}
+.activity-item>div{flex:1;min-width:0}
+.activity-item strong{display:block;font-size:13px;line-height:1.4}
+.activity-item small{display:block;line-height:1.5;margin-top:4px}
+.activity-item>b{color:#7bbcff;font-size:19px;font-weight:500}
+.activity-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:11px;background:rgba(55,125,255,.1)}
+.activity-icon.purple{background:rgba(125,91,255,.1)}
+.activity-icon.green{background:rgba(51,209,146,.1)}
+.home-card{display:flex;flex-direction:column;align-items:flex-start}
+.home-card .card-line{width:44px;height:2px;margin:12px 0 13px}
+.home-card p{flex:1;line-height:1.65}
+.card-action{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;margin-top:10px;text-align:center}
+.panel-action{min-height:44px;display:flex;align-items:center;justify-content:center;margin:22px auto 0;padding:12px 18px;text-decoration:none;text-align:center}
+.champion-card,.social-card{transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.social-card{min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-decoration:none}
+.social-coming{line-height:1.4}
+footer p{line-height:1.7}
+button,a{-webkit-tap-highlight-color:transparent}
+@media(min-width:901px){
+  .dashboard-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+  .activity-panel{min-width:0}
+  .activity-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 22px}
+  .activity-item{border-bottom:0}
+}
+@media(max-width:560px){
+  .dashboard-live{font-size:11px;padding:8px 11px}
+  .activity-list{display:flex;flex-direction:column}
+  .activity-item{padding:13px 0}
+  .activity-icon{flex-basis:36px;width:36px;height:36px}
+  .activity-item strong{font-size:12px}
+  .activity-item small{font-size:11px}
+  .home-card .icon{font-size:25px}
+  .card-action{min-height:46px;padding:12px;font-size:11px}
+  .champion-card{padding:18px 12px}
+  .social-card{min-height:92px}
+  .panel-action{width:100%}
+}
