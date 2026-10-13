@@ -1,0 +1,68 @@
+/* SC LATAM — mobile-first visual polish. Presentation only; preserves existing app logic. */
+:root{--scm-bg:#070b16;--scm-panel:#0e1729;--scm-line:rgba(117,164,255,.2);--scm-blue:#3477f6;--scm-cyan:#69ddff}
+html{scroll-padding-top:100px}
+body{background:var(--scm-bg);color:#f4f7ff}
+header{position:relative;z-index:20;background:rgba(7,11,22,.96)!important;border-bottom:1px solid var(--scm-line)!important;backdrop-filter:blur(18px)}
+.mobile-bottom-nav{z-index:1000!important;background:rgba(8,13,25,.96)!important;border-top:1px solid var(--scm-line)!important;backdrop-filter:blur(18px);padding-bottom:env(safe-area-inset-bottom,0)!important}
+.mobile-bottom-nav a{color:#91a2c0!important}
+.mobile-bottom-nav a.active,.mobile-bottom-nav a:hover{color:var(--scm-cyan)!important}
+.mobile-bottom-nav a.active svg{filter:drop-shadow(0 0 7px rgba(105,221,255,.5))}
+@media(max-width:700px){
+ body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+ header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;padding:10px 13px!important}
+ header .logo{min-width:0!important;gap:8px!important}
+ header .logo img{width:34px!important;height:34px!important;object-fit:contain}
+ header .logo span{font-size:10px!important;letter-spacing:.04em!important;white-space:nowrap}
+ header nav{order:3!important;display:flex!important;flex:0 0 100%!important;width:100%!important;gap:8px!important;overflow-x:auto!important;padding:5px 0 2px!important;scrollbar-width:none}
+ header nav::-webkit-scrollbar{display:none}
+ header nav a{flex:0 0 auto!important;padding:8px 10px!important;border:1px solid rgba(117,164,255,.12);border-radius:9px;background:rgba(255,255,255,.025);font-size:11px!important;white-space:nowrap}
+ header .btn-header{font-size:10px!important;padding:9px 10px!important;white-space:nowrap}
+ .home-hero{position:relative!important;min-height:255px!important;padding:32px 14px 65px!important;overflow:hidden}
+ .home-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 15%,rgba(52,119,246,.25),transparent 60%);pointer-events:none}
+ .home-title h1{font-size:clamp(88px,25vw,126px)!important}
+ .home-title h2{font-size:clamp(19px,5.5vw,27px)!important;letter-spacing:2px!important}
+ .home-slogan{font-size:14px!important;line-height:1.6;letter-spacing:.04em!important}
+ .app-dashboard{padding:0 13px 22px!important}
+ .dashboard-heading{gap:10px!important;margin-bottom:14px!important}
+ .dashboard-heading h2{font-size:24px!important}
+ .dashboard-live{font-size:10px!important;padding:7px 10px!important}
+ .featured-tournament{padding:20px 17px!important;border-radius:16px!important}
+ .featured-copy h2{font-size:29px!important}
+ .featured-copy p{font-size:13px;line-height:1.55}
+ .featured-meta{gap:8px 12px!important;font-size:11px!important}
+ .dashboard-btn{width:100%;box-sizing:border-box;justify-content:center;min-height:44px}
+ .dashboard-panel{padding:16px!important}
+ .home-cards{padding:0 13px 22px!important;gap:11px!important}
+ .home-card{padding:20px 17px!important;border-radius:15px!important}
+ .home-card h2{font-size:16px!important}
+ .home-card p{font-size:13px!important;line-height:1.6}
+ .card-action{display:flex;justify-content:center;align-items:center;min-height:42px;box-sizing:border-box}
+ .home-bottom{padding:0 13px 25px!important;gap:12px!important}
+ .home-panel{padding:17px 14px!important;border-radius:15px!important}
+ .tournaments-page,.events-page{padding:38px 13px 55px!important}
+ .tournaments-hero{margin-bottom:30px!important}
+ .tournaments-hero h1,.events-hero h1{font-size:clamp(40px,12vw,54px)!important}
+ .tournaments-hero p,.events-hero p{font-size:13px!important;line-height:1.7!important}
+ .tournament-item{min-height:0!important;border-radius:15px!important}
+ .tournament-content{padding:20px 17px!important;gap:10px!important}
+ .tournament-content h3{font-size:25px!important}
+ .tournament-content p{font-size:12px!important}
+ .tournament-info-grid{grid-template-columns:1fr!important}
+ .tournament-info{padding:17px!important}
+ .tournament-actions{width:100%!important;flex-direction:column!important}
+ .tournament-button{width:100%!important;min-height:44px!important;box-sizing:border-box}
+ .events-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .event-card{aspect-ratio:4/5!important;border-radius:12px!important}
+ .event-content{padding:10px!important}
+ .event-content h3{font-size:12px!important;line-height:1.35}
+ .event-content p{font-size:10px!important;line-height:1.45}
+ .events-heading h2{font-size:16px!important}
+ .minecraft-page{padding:32px 13px 45px!important}
+ .minecraft-shell{width:100%!important}
+ .minecraft-cards{grid-template-columns:1fr!important;gap:12px!important}
+ .minecraft-btn{min-height:75px!important;border-radius:14px!important}
+ .page-back,.events-back{display:flex!important;justify-content:center;align-items:center;min-height:44px;box-sizing:border-box}
+ footer{padding-bottom:20px!important}
+}
+@media(min-width:701px) and (max-width:1000px){header{gap:12px}header nav{gap:12px}header nav a{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
