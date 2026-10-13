@@ -345,3 +345,68 @@ button,a{-webkit-tap-highlight-color:transparent}
   .social-card{min-height:92px}
   .panel-action{width:100%}
 }
+
+
+/* SC LATAM — unified visual language for inner pages */
+.events-page,.minecraft-page,.tournaments-page{
+  color:#f4f7ff;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(43,103,235,.16),transparent 44%),
+    linear-gradient(180deg,#080d19 0%,#060914 100%) !important;
+}
+.events-page{padding-top:clamp(42px,6vw,76px)}
+.events-hero{max-width:800px;margin-left:auto;margin-right:auto}
+.events-kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(105,221,255,.2);border-radius:5px;background:rgba(55,125,255,.08);color:#69ddff;letter-spacing:2px}
+.events-hero h1{
+  color:#f5f8ff;
+  background:linear-gradient(180deg,#fff 0%,#b9d2ff 55%,#4385ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:-.055em;text-shadow:none;
+}
+.events-hero p{color:#a9b7d0}
+.events-heading{padding-bottom:13px;border-bottom:1px solid rgba(112,157,255,.14)}
+.events-heading .dot{background:#69ddff;box-shadow:0 0 14px rgba(105,221,255,.55)}
+.empty-events,.empty-state{
+  border:1px dashed rgba(112,157,255,.24);
+  border-radius:12px;
+  background:rgba(13,20,37,.58);
+  color:#b5c4dc;
+}
+.event-card{
+  border-color:rgba(78,140,255,.35);
+  border-radius:14px;
+  background-color:#0b1426;
+  box-shadow:0 16px 38px rgba(0,0,0,.18);
+}
+.event-card:hover{border-color:rgba(105,221,255,.58);box-shadow:0 18px 40px rgba(0,0,0,.25),0 0 22px rgba(42,111,255,.09)}
+.event-status{color:#69ddff}
+.events-back,.page-back{
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.events-back:hover,.page-back:hover{transform:translateY(-2px);border-color:rgba(105,221,255,.45);background:rgba(55,125,255,.1)}
+.minecraft-page{
+  align-items:flex-start;
+  background:
+    radial-gradient(ellipse at 50% 10%,rgba(43,103,235,.18),transparent 42%),
+    linear-gradient(180deg,#080d19,#060914) !important;
+}
+.minecraft-word{color:#dbe7ff}
+.minecraft-divider b{color:#69ddff}
+.minecraft-tagline{color:#b6c5df}
+.minecraft-btn{
+  border:1px solid rgba(112,157,255,.22);
+  border-radius:13px;
+  background:linear-gradient(145deg,rgba(16,27,48,.98),rgba(8,14,28,.98));
+  box-shadow:0 12px 30px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.025);
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.minecraft-btn:hover{transform:translateY(-3px);border-color:rgba(105,221,255,.48);box-shadow:0 18px 36px rgba(0,0,0,.24),0 0 22px rgba(42,111,255,.08)}
+.minecraft-info h2{color:#f3f7ff}
+.minecraft-info p{color:#a9b7d0}
+@media(max-width:560px){
+  .events-page{padding:42px 14px 70px}
+  .events-grid{gap:10px}
+  .events-hero h1{font-size:clamp(42px,12vw,54px)}
+  .event-content p{font-size:10px}
+  .minecraft-page{padding:34px 14px 58px}
+}
