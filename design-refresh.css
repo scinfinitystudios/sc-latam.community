@@ -1,0 +1,132 @@
+/* SC LATAM — visual refresh v1
+   Minimalista, profesional y responsive. Solo presentación: no altera enlaces ni lógica. */
+:root{
+  --sc-bg:#070b16;
+  --sc-surface:#0d1425;
+  --sc-surface-2:#111c31;
+  --sc-border:rgba(148,177,255,.16);
+  --sc-blue:#4385ff;
+  --sc-cyan:#63c7ff;
+  --sc-muted:#aab6cc;
+  --sc-radius:18px;
+}
+html{scroll-padding-top:90px}
+body{background:var(--sc-bg);color:#f4f7ff}
+header{
+  padding:12px clamp(16px,4vw,56px);
+  background:rgba(7,11,22,.88);
+  border-bottom:1px solid var(--sc-border);
+  box-shadow:0 10px 35px rgba(0,0,0,.16);
+}
+.logo img{border-radius:12px;box-shadow:0 0 22px rgba(67,133,255,.16)}
+.logo span{letter-spacing:.07em;font-size:clamp(12px,1vw,15px)}
+nav{gap:clamp(12px,1.8vw,26px)}
+nav a{color:#cbd5e8;font-size:13px}
+nav a:hover,nav a:focus-visible{color:var(--sc-cyan)}
+.btn-header{border-radius:999px;padding:11px 18px;background:linear-gradient(135deg,#3477f6,#4d9aff);box-shadow:0 7px 24px rgba(45,112,255,.22)}
+.home-hero{
+  min-height:clamp(330px,38vw,500px);
+  padding:58px 20px 100px;
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(48,111,255,.2),transparent 42%),
+    radial-gradient(ellipse at 50% 100%,rgba(25,73,160,.12),transparent 52%);
+}
+.home-hero::after{height:110px;background:linear-gradient(transparent,var(--sc-bg))}
+.home-title h1{filter:drop-shadow(0 8px 35px rgba(56,116,255,.28));letter-spacing:-.07em}
+.hero-logo h2,.home-title h2{letter-spacing:clamp(4px,.8vw,11px)}
+.home-slogan{color:#dce6f8;font-weight:650;letter-spacing:.09em}
+.home-slogan span{color:var(--sc-cyan)}
+.app-dashboard{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px) 30px}
+.dashboard-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 18px}
+.dashboard-kicker{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--sc-cyan)}
+.dashboard-heading h2{margin-top:8px;font-size:clamp(24px,3vw,34px);letter-spacing:-.035em}
+.dashboard-live{display:flex;align-items:center;gap:8px;color:#b8c7dc;font-size:12px;padding:9px 13px;border:1px solid var(--sc-border);border-radius:999px;background:rgba(13,20,37,.65)}
+.dashboard-live i{width:7px;height:7px;border-radius:50%;background:#45d995;box-shadow:0 0 12px rgba(69,217,149,.6)}
+.featured-tournament{
+  border:1px solid rgba(93,151,255,.25);border-radius:var(--sc-radius);
+  background:radial-gradient(ellipse at 88% 20%,rgba(50,111,255,.2),transparent 40%),linear-gradient(125deg,#111d34,#0b1221 72%);
+  padding:clamp(22px,4vw,42px);min-height:230px;box-shadow:0 20px 60px rgba(0,0,0,.17);
+}
+.featured-label{color:var(--sc-cyan);font-size:11px;font-weight:850;letter-spacing:.13em}
+.featured-copy h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.04em;margin:12px 0}
+.featured-copy p,.featured-meta{color:var(--sc-muted)}
+.featured-meta{display:flex;flex-wrap:wrap;gap:12px 20px;margin-top:18px;font-size:13px}
+.dashboard-btn{display:inline-flex;align-items:center;gap:14px;margin-top:24px;padding:12px 18px;border-radius:10px;background:linear-gradient(135deg,#3477f6,#4b9aff);color:#fff;text-decoration:none;font-size:12px;font-weight:850;letter-spacing:.04em;box-shadow:0 8px 24px rgba(52,119,246,.18)}
+.dashboard-btn:hover{transform:translateY(-2px)}
+.featured-mark{color:rgba(114,166,255,.22);font-size:clamp(65px,9vw,115px);font-weight:950;line-height:.78;letter-spacing:-.09em}
+.featured-mark small{font-size:.28em;letter-spacing:.2em}
+.dashboard-grid{margin-top:18px}
+.dashboard-panel,.home-panel,.card{
+  background:linear-gradient(155deg,rgba(16,26,46,.96),rgba(9,15,28,.98));
+  border:1px solid var(--sc-border);border-radius:var(--sc-radius);
+}
+.dashboard-panel{padding:22px}
+.dashboard-panel-title h3{letter-spacing:.08em;font-size:13px}
+.activity-item{padding:15px 0;border-bottom:1px solid rgba(148,177,255,.1)}
+.activity-item:last-child{border-bottom:0}
+.activity-item small{color:var(--sc-muted)}
+.cards{gap:16px}
+.home-cards{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px) 34px}
+.home-card{min-height:260px;padding:26px 20px 20px}
+.home-card h2{letter-spacing:.06em;font-size:18px}
+.home-card p{color:#b9c5d9;font-size:14px}
+.tournament-card,.register-card,.mode-card,.participation-card{border-color:var(--sc-border);color:var(--sc-blue)}
+.home-card:hover{transform:translateY(-4px);border-color:rgba(99,199,255,.38)}
+.card-action{border-radius:9px;padding:12px 10px;font-size:11px;letter-spacing:.04em}
+.purple-action,.blue-action,.green-action,.gold-action{background:linear-gradient(135deg,#2459bd,#347ff4)}
+.home-bottom{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,56px) 48px;gap:18px}
+.home-panel{padding:clamp(18px,2.5vw,28px)}
+.panel-title h2{font-size:clamp(16px,1.7vw,21px);letter-spacing:.03em}
+.champion-card,.social-card{border-radius:12px;background:rgba(5,10,21,.6);border-color:var(--sc-border)}
+.panel-action{width:auto;max-width:340px;border-radius:9px;background:linear-gradient(135deg,#2459bd,#347ff4)}
+footer{border-top:1px solid var(--sc-border);background:#080d19;color:#9eabc2;padding:30px 18px}
+a,button{transition:color .2s ease,background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+:focus-visible{outline:2px solid var(--sc-cyan);outline-offset:3px}
+@media(max-width:900px){
+  header{flex-wrap:wrap;gap:12px}
+  nav{order:3;width:100%;overflow-x:auto;padding:7px 1px 4px;gap:20px;scrollbar-width:thin}
+  nav a{white-space:nowrap}
+  .home-hero{min-height:330px;padding-top:42px}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .home-bottom{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  header{padding:10px 14px}
+  .logo{gap:8px}
+  .logo img{width:36px;height:36px;object-fit:contain}
+  .logo span{font-size:11px;letter-spacing:.035em}
+  .btn-header{padding:9px 12px;font-size:11px}
+  nav{gap:17px}
+  nav a{font-size:12px}
+  .home-hero{min-height:280px;padding:35px 14px 80px}
+  .home-title h1{font-size:clamp(100px,28vw,145px);letter-spacing:-.08em}
+  .home-title h2{font-size:clamp(20px,6vw,30px);letter-spacing:3px}
+  .home-slogan{font-size:16px;letter-spacing:.045em}
+  .app-dashboard{padding:0 14px 24px}
+  .dashboard-heading{align-items:flex-start;flex-direction:column}
+  .dashboard-heading h2{font-size:25px}
+  .featured-tournament{padding:22px 18px;min-height:0}
+  .featured-mark{display:none}
+  .featured-copy h2{font-size:30px}
+  .featured-meta{font-size:12px}
+  .dashboard-panel{padding:18px}
+  .cards{grid-template-columns:1fr;gap:12px}
+  .home-cards{padding:0 14px 26px}
+  .home-card{min-height:0;padding:22px 18px}
+  .home-card p{min-height:0;margin-bottom:18px}
+  .home-bottom{padding:0 14px 30px;gap:14px}
+  .home-panel{padding:18px 14px}
+  .champions-grid{grid-template-columns:1fr}
+  .panel-title{gap:8px}
+  .panel-title h2{font-size:15px}
+  .panel-title svg{width:26px;height:26px;flex-shrink:0}
+  .social-box{gap:10px}
+  .social-card{padding:17px 8px 10px}
+  .social-brand,.brand-name{font-size:18px!important}
+  .social-brand{gap:7px}
+  .social-coming{font-size:10px!important;padding:9px 5px!important}
+  .panel-action{width:100%;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
