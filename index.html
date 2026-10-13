@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="panel-headers.css"><link rel="stylesheet" href="mobile.css"><link rel="stylesheet" href="registration.css">
   </head>
 <body>
-<header><div class="logo"><img src="logo.png" alt="SC LATAM Community"><span>SC LATAM COMMUNITY</span></div><nav><a href="index.html">Inicio</a><a href="./eventos.html">Eventos</a><a href="./torneos.html">Torneos</a><a href="./servidores.html">Servidores</a><a href="./historial.html">Historial</a><a href="./tienda.html">Tienda</a></nav><div class="account-nav" id="accountNav"><a class="btn-header" id="accountNavButton" href="cuenta.html">INICIAR SESIÓN</a><div class="account-nav-menu" id="accountNavMenu" hidden><div class="account-menu-profile"><span class="account-menu-avatar" aria-hidden="true">SC</span><div class="account-menu-identity"><strong>SC LATAM ID</strong><span id="accountNavEmail">Sesión activa</span><small>MIEMBRO DE LA COMUNIDAD</small></div></div><div class="account-menu-divider"></div><a href="cuenta.html"><span class="account-menu-icon" aria-hidden="true">👤</span><span><strong>Mi cuenta</strong><small>Perfil y sesión</small></span><b aria-hidden="true">›</b></a><a href="admin.html" id="accountAdminLink" hidden><span class="account-menu-icon" aria-hidden="true">🛡️</span><span><strong>SC Admin</strong><small>Administración</small></span><b aria-hidden="true">›</b></a><div class="account-menu-divider"></div><button type="button" id="accountSignOut"><span class="account-menu-icon" aria-hidden="true">↪</span><span><strong>Cerrar sesión</strong><small>Salir de tu cuenta SC</small></span></button></div></div></header>
+<header><div class="logo"><img src="logo.png" alt="SC LATAM Community"><span>SC LATAM COMMUNITY</span></div><nav><a href="index.html">Inicio</a><a href="./eventos.html">Eventos</a><a href="./torneos.html">Torneos</a><a href="./servidores.html">Servidores</a><a href="./historial.html">Historial</a><a href="./tienda.html">Tienda</a></nav><div class="account-nav" id="accountNav"><a class="btn-header" id="accountNavButton" href="cuenta.html">INICIAR SESIÓN</a><div class="account-nav-menu" id="accountNavMenu" hidden><div class="account-menu-profile"><span class="account-menu-avatar" aria-hidden="true"><img id="accountNavAvatar" alt="" hidden><span id="accountNavInitials">SC</span></span><div class="account-menu-identity"><strong id="accountNavDisplayName">SC LATAM ID</strong><span id="accountNavEmail">Sesión activa</span><small>MIEMBRO DE LA COMUNIDAD</small></div></div><div class="account-menu-divider"></div><a href="cuenta.html"><span class="account-menu-icon" aria-hidden="true">👤</span><span><strong>Mi cuenta</strong><small>Perfil y sesión</small></span><b aria-hidden="true">›</b></a><a href="admin.html" id="accountAdminLink" hidden><span class="account-menu-icon" aria-hidden="true">🛡️</span><span><strong>SC Admin</strong><small>Administración</small></span><b aria-hidden="true">›</b></a><div class="account-menu-divider"></div><button type="button" id="accountSignOut"><span class="account-menu-icon" aria-hidden="true">↪</span><span><strong>Cerrar sesión</strong><small>Salir de tu cuenta SC</small></span></button></div></div></header>
 <main class="home-page"><section id="inicio" class="hero home-hero"><div class="hero-content home-hero-content"><div class="hero-logo home-title"><h1>SC</h1><h2>LATAM COMMUNITY</h2><img class="mobile-sc-logo" src="hero-sc-logo.svg" alt="SC LATAM COMMUNITY"></div><p class="slogan home-slogan">LA COMUNIDAD DE TORNEOS<br>QUE <span>IMPULSA TU NIVEL.</span></p></div></section>
 <section class="app-dashboard" aria-label="Resumen SC LATAM">
   <div class="dashboard-heading">
@@ -70,7 +70,7 @@
 .account-nav-menu{position:absolute;right:0;top:calc(100% + 12px);z-index:4000;width:292px;padding:10px;border:1px solid rgba(100,151,255,.28);border-radius:18px;background:linear-gradient(155deg,rgba(13,23,45,.99),rgba(5,10,24,.99));box-shadow:0 22px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);animation:accountMenuIn .18s ease-out}
 .account-nav-menu[hidden],#accountAdminLink[hidden]{display:none}
 .account-menu-profile{display:flex;align-items:center;gap:12px;padding:12px 10px 14px}
-.account-menu-avatar{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,#398bff,#2447d8 70%,#642de0);border:1px solid rgba(255,255,255,.2);font-size:15px;font-weight:950;letter-spacing:1px;box-shadow:0 6px 22px rgba(35,104,255,.28)}
+.account-menu-avatar{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;overflow:hidden;border-radius:14px;background:linear-gradient(145deg,#398bff,#2447d8 70%,#642de0);border:1px solid rgba(255,255,255,.2);font-size:15px;font-weight:950;letter-spacing:1px;box-shadow:0 6px 22px rgba(35,104,255,.28)}.account-menu-avatar img{width:100%;height:100%;object-fit:cover}.account-menu-avatar img[hidden]{display:none}
 .account-menu-identity{display:flex;min-width:0;flex-direction:column;gap:4px}
 .account-menu-identity strong{font-size:13px;letter-spacing:.35px;color:#f5f8ff}
 .account-menu-identity span{max-width:205px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#9eb7df}
@@ -97,6 +97,9 @@ const nav = document.getElementById("accountNav");
 const navButton = document.getElementById("accountNavButton");
 const menu = document.getElementById("accountNavMenu");
 const adminLink = document.getElementById("accountAdminLink");
+const navAvatar = document.getElementById("accountNavAvatar");
+const navInitials = document.getElementById("accountNavInitials");
+const navDisplayName = document.getElementById("accountNavDisplayName");
 const signOutButton = document.getElementById("accountSignOut");
 let supabase = null;
 function showSignedOut() {
@@ -107,6 +110,11 @@ function showSignedOut() {
   menu.hidden = true;
   adminLink.hidden = true;
   signOutButton.hidden = true;
+  navDisplayName.textContent = "SC LATAM ID";
+  navAvatar.hidden = true;
+  navAvatar.removeAttribute("src");
+  navInitials.hidden = false;
+  navInitials.textContent = "SC";
 }
 async function showSignedIn(user) {
   navButton.textContent = "MI CUENTA ▾";
@@ -115,8 +123,22 @@ async function showSignedIn(user) {
   navButton.setAttribute("aria-expanded", "false");
   document.getElementById("accountNavEmail").textContent = user.email || "Sesión iniciada";
   signOutButton.hidden = false;
+  navDisplayName.textContent = user.user_metadata?.display_name || "SC LATAM ID";
+  navInitials.textContent = (navDisplayName.textContent || user.email || "SC").trim().slice(0, 2).toUpperCase();
+  navAvatar.hidden = true;
+  navAvatar.removeAttribute("src");
+  navInitials.hidden = false;
   try {
-    const { data, error } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+    const { data, error } = await supabase.from("profiles").select("role,display_name,avatar_url").eq("id", user.id).maybeSingle();
+    if (!error && data) {
+      navDisplayName.textContent = data.display_name || user.user_metadata?.display_name || "SC LATAM ID";
+      navInitials.textContent = navDisplayName.textContent.trim().slice(0, 2).toUpperCase() || "SC";
+      if (data.avatar_url) {
+        navAvatar.onload = () => { navAvatar.hidden = false; navInitials.hidden = true; };
+        navAvatar.onerror = () => { navAvatar.hidden = true; navInitials.hidden = false; };
+        navAvatar.src = data.avatar_url;
+      }
+    }
     adminLink.hidden = Boolean(error) || data?.role !== "admin";
   } catch {
     adminLink.hidden = true;
