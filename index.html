@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="panel-headers.css"><link rel="stylesheet" href="mobile.css"><link rel="stylesheet" href="registration.css">
   </head>
 <body>
-<header><div class="logo"><img src="logo.png" alt="SC LATAM Community"><span>SC LATAM COMMUNITY</span></div><nav><a href="index.html">Inicio</a><a href="./eventos.html">Eventos</a><a href="./torneos.html">Torneos</a><a href="./servidores.html">Servidores</a><a href="./historial.html">Historial</a><a href="./tienda.html">Tienda</a></nav><a class="btn-header" href="cuenta.html">INICIAR SESIÓN</a></header>
+<header><div class="logo"><img src="logo.png" alt="SC LATAM Community"><span>SC LATAM COMMUNITY</span></div><nav><a href="index.html">Inicio</a><a href="./eventos.html">Eventos</a><a href="./torneos.html">Torneos</a><a href="./servidores.html">Servidores</a><a href="./historial.html">Historial</a><a href="./tienda.html">Tienda</a></nav><div class="account-nav" id="accountNav"><a class="btn-header" id="accountNavButton" href="cuenta.html">INICIAR SESIÓN</a><div class="account-nav-menu" id="accountNavMenu" hidden><a href="cuenta.html">👤 Mi cuenta</a><a href="admin.html" id="accountAdminLink" hidden>🛡️ SC Admin</a><button type="button" id="accountSignOut">↪ Cerrar sesión</button></div></div></header>
 <main class="home-page"><section id="inicio" class="hero home-hero"><div class="hero-content home-hero-content"><div class="hero-logo home-title"><h1>SC</h1><h2>LATAM COMMUNITY</h2><img class="mobile-sc-logo" src="hero-sc-logo.svg" alt="SC LATAM COMMUNITY"></div><p class="slogan home-slogan">LA COMUNIDAD DE TORNEOS<br>QUE <span>IMPULSA TU NIVEL.</span></p></div></section>
 <section class="app-dashboard" aria-label="Resumen SC LATAM">
   <div class="dashboard-heading">
@@ -64,4 +64,100 @@
 <a href="servidores.html" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="6" rx="2"/><rect x="4" y="14.5" width="16" height="6" rx="2"/><path d="M8 6.5h.01M8 17.5h.01M11 6.5h5M11 17.5h5"/></svg><span>Servidores</span></a>
 <a href="historial.html" class=""><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Historial</span></a>
 </nav>
+
+<style>
+.account-nav{position:relative;display:inline-flex;align-items:center;flex-shrink:0}
+.account-nav-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:1000;min-width:190px;padding:7px;border:1px solid rgba(110,145,210,.28);border-radius:13px;background:#0b1222;box-shadow:0 16px 38px #0008}
+.account-nav-menu[hidden],#accountAdminLink[hidden]{display:none}
+.account-nav-menu a,.account-nav-menu button{display:flex;width:100%;align-items:center;gap:8px;padding:11px 12px;border:0;border-radius:8px;background:transparent;color:#eaf0ff;text-decoration:none;text-align:left;font:inherit;font-size:13px;cursor:pointer}
+.account-nav-menu a:hover,.account-nav-menu button:hover{background:#1a2a47}
+#accountNavButton[aria-expanded="true"]{filter:brightness(1.12)}
+@media(max-width:760px){.account-nav-menu{right:0;min-width:180px}}
+</style>
+
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+const nav = document.getElementById("accountNav");
+const navButton = document.getElementById("accountNavButton");
+const menu = document.getElementById("accountNavMenu");
+const adminLink = document.getElementById("accountAdminLink");
+const signOutButton = document.getElementById("accountSignOut");
+let supabase = null;
+function showSignedOut() {
+  navButton.textContent = "INICIAR SESIÓN";
+  navButton.href = "cuenta.html";
+  navButton.removeAttribute("aria-haspopup");
+  navButton.removeAttribute("aria-expanded");
+  menu.hidden = true;
+  adminLink.hidden = true;
+  signOutButton.hidden = true;
+}
+async function showSignedIn(user) {
+  navButton.textContent = "MI CUENTA ▾";
+  navButton.href = "cuenta.html";
+  navButton.setAttribute("aria-haspopup", "true");
+  navButton.setAttribute("aria-expanded", "false");
+  signOutButton.hidden = false;
+  try {
+    const { data, error } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+    adminLink.hidden = Boolean(error) || data?.role !== "admin";
+  } catch {
+    adminLink.hidden = true;
+  }
+}
+navButton.addEventListener("click", (event) => {
+  if (!supabase || navButton.textContent === "INICIAR SESIÓN") return;
+  event.preventDefault();
+  menu.hidden = !menu.hidden;
+  navButton.setAttribute("aria-expanded", String(!menu.hidden));
+});
+document.addEventListener("click", (event) => {
+  if (!nav.contains(event.target)) {
+    menu.hidden = true;
+    navButton.setAttribute("aria-expanded", "false");
+  }
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    menu.hidden = true;
+    navButton.setAttribute("aria-expanded", "false");
+  }
+});
+signOutButton.addEventListener("click", async () => {
+  if (!supabase) return;
+  signOutButton.disabled = true;
+  const { error } = await supabase.auth.signOut();
+  signOutButton.disabled = false;
+  if (error) {
+    signOutButton.textContent = "No se pudo cerrar sesión";
+    return;
+  }
+  showSignedOut();
+});
+async function initAccountNav() {
+  try {
+    const response = await fetch("/api/config", { cache: "no-store" });
+    const config = await response.json();
+    if (!response.ok || !config.url || !config.anonKey) throw new Error("Supabase config unavailable");
+    supabase = createClient(config.url, config.anonKey, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
+    const { data, error } = await supabase.auth.getSession();
+    if (error) throw error;
+    if (data.session?.user) await showSignedIn(data.session.user);
+    else showSignedOut();
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        // Avoid awaiting Supabase calls inside the auth callback.
+        setTimeout(() => showSignedIn(session.user), 0);
+      } else {
+        showSignedOut();
+      }
+    });
+  } catch (error) {
+    console.warn("SC account navigation could not initialize", error);
+    showSignedOut();
+  }
+}
+initAccountNav();
+</script>
 </body></html>
