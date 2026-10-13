@@ -130,3 +130,176 @@ a,button{transition:color .2s ease,background .2s ease,border-color .2s ease,tra
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* SC LATAM — esports organization direction v2 */
+:root{
+  --sc-bg:#060914;
+  --sc-surface:#0b1222;
+  --sc-surface-2:#101b30;
+  --sc-border:rgba(112,157,255,.2);
+  --sc-blue:#367dff;
+  --sc-cyan:#69ddff;
+  --sc-muted:#a9b7d0;
+  --sc-radius:14px;
+}
+body{
+  background:
+    radial-gradient(ellipse at 50% -18%,rgba(34,91,210,.15),transparent 45%),
+    #060914;
+}
+header{
+  position:relative;
+  z-index:20;
+  background:rgba(5,9,20,.94);
+  border-bottom:1px solid rgba(105,160,255,.2);
+  backdrop-filter:blur(16px);
+}
+header::after{
+  content:"";
+  position:absolute;
+  bottom:-1px;left:4%;right:4%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(71,137,255,.55),transparent);
+  pointer-events:none;
+}
+.logo span{font-weight:900;text-transform:uppercase}
+.home-hero{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  min-height:clamp(370px,43vw,560px);
+  background:
+    linear-gradient(180deg,rgba(6,9,20,.04),rgba(6,9,20,.12) 58%,#060914 100%),
+    radial-gradient(ellipse at 50% 25%,rgba(41,105,255,.27),transparent 46%),
+    repeating-linear-gradient(115deg,transparent 0 78px,rgba(94,145,255,.025) 79px 80px);
+}
+.home-hero::before{
+  content:"SC";
+  position:absolute;z-index:-1;
+  top:42%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:clamp(240px,48vw,620px);
+  line-height:.8;font-weight:1000;letter-spacing:-.12em;
+  color:rgba(104,154,255,.035);
+  -webkit-text-stroke:1px rgba(106,163,255,.09);
+  pointer-events:none;
+}
+.home-hero::after{
+  content:"";
+  height:130px;
+  background:linear-gradient(transparent,#060914);
+}
+.home-hero-content{position:relative;z-index:1}
+.home-title h1{
+  color:#f4f7ff;
+  text-shadow:0 0 35px rgba(55,125,255,.22),0 10px 45px rgba(0,0,0,.45);
+}
+.home-title h2{
+  color:#a9c9ff;
+  font-weight:900;
+  text-shadow:0 0 22px rgba(62,129,255,.18);
+}
+.home-slogan{line-height:1.65}
+.home-slogan span{color:#70d8ff}
+.dashboard-heading{
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(105,157,255,.13);
+}
+.dashboard-kicker{
+  display:inline-flex;align-items:center;gap:9px;
+}
+.dashboard-kicker::before{
+  content:"";display:inline-block;width:22px;height:2px;
+  background:var(--sc-cyan);box-shadow:0 0 12px rgba(105,221,255,.5);
+}
+.featured-tournament{
+  position:relative;overflow:hidden;isolation:isolate;
+  border-color:rgba(78,140,255,.35);
+  background:
+    radial-gradient(ellipse at 85% 42%,rgba(42,103,235,.22),transparent 42%),
+    linear-gradient(112deg,#101a30 0%,#0b1222 58%,#080e1c 100%);
+  box-shadow:0 22px 70px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035);
+}
+.featured-tournament::before{
+  content:"";position:absolute;z-index:-1;
+  width:300px;height:300px;right:-80px;top:-120px;
+  border:1px solid rgba(102,159,255,.13);border-radius:50%;
+  box-shadow:0 0 0 28px rgba(102,159,255,.025),0 0 0 58px rgba(102,159,255,.02);
+}
+.featured-tournament::after{
+  content:"";position:absolute;left:0;top:18%;bottom:18%;width:3px;
+  background:linear-gradient(transparent,#58baff,transparent);
+  box-shadow:0 0 18px rgba(88,186,255,.4);
+}
+.featured-label{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 10px;border:1px solid rgba(105,221,255,.2);
+  border-radius:5px;background:rgba(55,125,255,.08);
+}
+.featured-copy h2{
+  color:#f6f8ff;
+  text-transform:uppercase;
+  text-shadow:0 5px 28px rgba(0,0,0,.3);
+}
+.featured-mark{
+  position:relative;
+  color:rgba(105,157,255,.17);
+  -webkit-text-stroke:1px rgba(105,157,255,.13);
+  text-shadow:0 0 48px rgba(45,108,255,.13);
+}
+.dashboard-btn,.panel-action{
+  border:1px solid rgba(140,193,255,.18);
+  box-shadow:0 8px 26px rgba(35,100,255,.2),inset 0 1px rgba(255,255,255,.12);
+}
+.dashboard-panel,.home-panel,.card{
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 12px 34px rgba(0,0,0,.13),inset 0 1px rgba(255,255,255,.025);
+}
+.dashboard-panel::before,.home-panel::before,.home-card::before{
+  content:"";position:absolute;left:18px;right:18px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(112,166,255,.28),transparent);
+  pointer-events:none;
+}
+.dashboard-panel-title h3,.home-card h2,.panel-title h2{
+  color:#f0f5ff;
+}
+.activity-icon{
+  border:1px solid rgba(120,166,255,.14);
+}
+.home-card{
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.home-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(91,172,255,.48);
+  box-shadow:0 18px 38px rgba(0,0,0,.22),0 0 24px rgba(42,111,255,.07);
+}
+.card-line{
+  background:linear-gradient(90deg,var(--sc-blue),var(--sc-cyan),transparent);
+}
+.card-action{
+  border:1px solid rgba(142,187,255,.14);
+}
+.champions-panel,.social-panel{
+  background:linear-gradient(150deg,rgba(13,22,40,.98),rgba(7,12,24,.99));
+}
+.champion-card:hover,.social-card:hover{
+  border-color:rgba(105,221,255,.4);
+  transform:translateY(-3px);
+}
+footer{
+  background:#050812;
+  border-top-color:rgba(105,157,255,.18);
+}
+.mobile-bottom-nav{
+  backdrop-filter:blur(18px);
+}
+@media(max-width:560px){
+  .home-hero{min-height:300px}
+  .home-hero::before{font-size:72vw}
+  .featured-tournament::before{width:210px;height:210px;right:-100px;top:-70px}
+  .featured-tournament::after{top:16%;bottom:16%}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-card:hover,.champion-card:hover,.social-card:hover{transform:none}
+}
