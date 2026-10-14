@@ -34,5 +34,40 @@ function choose(i,j){selection={i,j};render();$("toast").style.display="block";$
 function updateTicket(){if(!selection){$("ticket").innerHTML='<div class="empty">Tu boleto está vacío.<br>Elige una opción en una partida.</div>';return}const m=data[selection.i],mk=m.markets[selection.j],stake=Math.max(0,Number($("stake").value)||0);$("ticket").innerHTML='<div class="ticket-item"><span class="tag">'+m.game+' · DEMO</span><strong>'+mk[0]+'</strong><p>Cuota ficticia: <b style="color:var(--green)">'+mk[1]+'</b></p><button id="remove" class="tab">Quitar selección</button></div><p>Importe de prueba: <b>'+stake+' puntos</b></p><p>Retorno hipotético: <b style="color:var(--green)">'+(stake*Number(mk[1])).toFixed(2)+' puntos</b></p><button class="primary" id="demoBtn">Probar boleto demo</button><p class="note">Esto no envía una apuesta ni modifica un saldo real.</p>';$("remove").onclick=()=>{selection=null;updateTicket()};$("demoBtn").onclick=()=>{$("toast").style.display="block";$("toast").textContent="Demo completada: no se ha enviado ninguna apuesta ni movido dinero.";};}
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");view=b.dataset.view;render()}));
 document.querySelectorAll(".game").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".game").forEach(x=>x.classList.remove("active"));b.classList.add("active");game=b.dataset.game;render()}));
-$("stake").addEventListener("input",updateTicket);render();
+$("stake").addEventListener("input",updateTicket);
+async function loadProviderMatches(){
+  const banner=document.createElement("div");
+  banner.className="match";
+  banner.id="providerStatus";
+  banner.innerHTML="<strong>Conectando datos de esports…</strong><p>Los datos reales solo aparecerán cuando el proveedor esté configurado.</p>";
+  document.querySelector("main").insertBefore(banner,$("matches"));
+  try {
+    const results=await Promise.all(["live","upcoming"].map(async status=>{
+      const response=await fetch("/api/esports-matches?status="+status,{headers:{Accept:"application/json"}});
+      const payload=await response.json();
+      if(!response.ok||!payload.ok) throw new Error(payload.message||"Proveedor no configurado");
+      return payload.matches||[];
+    }));
+    const all=results.flat();
+    if(!all.length) {
+      banner.innerHTML="<strong>Datos reales conectados, sin partidas disponibles</strong><p>El proveedor respondió correctamente, pero no devolvió partidos compatibles en este momento. No se muestran marcadores ficticios como reales.</p>";
+      return;
+    }
+    data.splice(0,data.length,...all.map(m=>({
+      game:m.game,state:m.status==="live"?"live":"soon",
+      time:m.startsAt?new Date(m.startsAt).toLocaleString():"Horario por confirmar",
+      a:m.teamA,b:m.teamB,ia:"🎮",ib:"🎮",
+      score:m.scoreA!==null&&m.scoreB!==null?m.scoreA+" : "+m.scoreB:"VS",
+      markets:[],providerMatchId:m.providerMatchId,tournament:m.tournament,isDemo:false
+    })));
+    selection=null;
+    banner.innerHTML="<strong>Datos recibidos de PandaScore</strong><p>Partidas verificadas por el proveedor: "+all.length+". Cobertura disponible según plan y torneos. Free Fire y Minecraft aún no están conectados.</p>";
+    $("matchCount").textContent=all.length+" partidos del proveedor";
+    render();
+  } catch (error) {
+    banner.innerHTML="<strong>Datos reales en preparación</strong><p>No se pudo verificar la conexión con PandaScore. Se mantiene la vista de demostración, claramente identificada; no se presenta como información en directo.</p>";
+  }
+}
+render();
+loadProviderMatches();
 </script></body></html>
