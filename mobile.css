@@ -375,3 +375,89 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .mobile-bottom-nav svg{width:20px!important;height:20px!important;flex:0 0 20px}
   .mobile-bottom-nav a span{font-size:8px!important;letter-spacing:-.1px}
 }
+
+
+/* ===== App WebView visual repair — Android mobile ===== */
+@media(max-width:768px){
+  /* Reserve space for Android's status bar so it never covers the header. */
+  header{
+    box-sizing:border-box!important;
+    padding:calc(max(26px,env(safe-area-inset-top))) 14px 12px!important;
+    min-height:94px!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    column-gap:10px!important;
+    align-items:center!important;
+  }
+  header .logo{min-width:0!important;gap:9px!important}
+  header .logo img{width:40px!important;height:40px!important;max-width:40px!important;object-fit:contain!important;flex:0 0 40px}
+  header .logo span{
+    display:block!important;min-width:0!important;
+    font-size:clamp(9px,2.5vw,12px)!important;
+    line-height:1.25!important;letter-spacing:.045em!important;
+    white-space:normal!important;
+  }
+  header .account-nav{min-width:0!important;grid-column:2;grid-row:1}
+  header .btn-header{
+    min-height:42px!important;padding:0 13px!important;
+    font-size:10px!important;letter-spacing:.035em!important;
+    white-space:nowrap!important;border-radius:999px!important;
+  }
+
+  /* Remove the oversized empty hero area and keep the brand centered. */
+  .home-hero{
+    box-sizing:border-box!important;
+    min-height:clamp(330px,52svh,430px)!important;
+    height:auto!important;
+    padding:26px 16px 30px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+  }
+  .home-hero-content{padding:0!important;margin:auto!important}
+  .mobile-sc-logo{
+    display:block!important;width:min(68vw,270px)!important;
+    max-height:190px!important;height:auto!important;
+    object-fit:contain!important;margin:0 auto!important;left:0!important;
+  }
+  .home-slogan{
+    margin:20px auto 0!important;
+    font-size:clamp(12px,3.2vw,15px)!important;
+    line-height:1.65!important;letter-spacing:.075em!important;
+    text-align:center!important;
+  }
+
+  /* Keep the last card/action reachable above the fixed app navigation. */
+  body{
+    padding-top:0!important;
+    padding-bottom:calc(118px + env(safe-area-inset-bottom))!important;
+    scroll-padding-bottom:calc(118px + env(safe-area-inset-bottom))!important;
+  }
+  main.home-page{padding-bottom:24px!important}
+  .app-dashboard{margin-top:0!important;margin-bottom:22px!important}
+  .home-cards,.home-bottom{margin-bottom:22px!important}
+
+  /* Six equal destinations: no clipped labels or accidental fifth-column layout. */
+  .mobile-bottom-nav{
+    box-sizing:border-box!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    left:8px!important;right:8px!important;
+    bottom:max(8px,env(safe-area-inset-bottom))!important;
+    height:68px!important;padding:5px 3px!important;
+  }
+  .mobile-bottom-nav a{
+    min-width:0!important;overflow:hidden!important;
+    gap:3px!important;padding:4px 1px!important;
+  }
+  .mobile-bottom-nav svg{width:20px!important;height:20px!important;flex:0 0 20px!important}
+  .mobile-bottom-nav a span{
+    display:block!important;max-width:100%!important;
+    overflow:hidden!important;text-overflow:clip!important;
+    font-size:clamp(7px,1.65vw,9px)!important;letter-spacing:-.025em!important;
+  }
+}
+@media(max-width:390px){
+  header{padding-left:9px!important;padding-right:9px!important}
+  header .logo img{width:34px!important;height:34px!important;flex-basis:34px}
+  header .logo span{font-size:9px!important}
+  header .btn-header{padding:0 9px!important;font-size:9px!important}
+  .mobile-sc-logo{width:min(72vw,245px)!important}
+  .mobile-bottom-nav{left:5px!important;right:5px!important}
+}
