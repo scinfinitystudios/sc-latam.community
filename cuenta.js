@@ -13,6 +13,9 @@ const toggle=document.getElementById("toggleMode");
 const accountCard=document.getElementById("accountCard");
 const profileCard=document.getElementById("profileCard");
 const profileEmail=document.getElementById("profileEmail");
+const profileMiniAvatar=document.getElementById("profileMiniAvatar");
+const profileWelcomeName=document.getElementById("profileWelcomeName");
+const memberSince=document.getElementById("memberSince");
 const profileMessage=document.getElementById("profileMessage");
 const logoutButton=document.getElementById("logoutButton");
 const profileForm=document.getElementById("profileForm");
@@ -41,16 +44,21 @@ function setAvatar(url,user=currentUser){
   profileAvatar.src=url||"logo.png";
   profileAvatar.onerror=()=>{profileAvatar.onerror=null;profileAvatar.src="logo.png";profileAvatar.classList.add("profile-avatar-fallback");};
   profileAvatar.alt=url?"Foto de perfil personalizada":"Logo de SC LATAM";
+  if(profileMiniAvatar){profileMiniAvatar.src=url||"logo.png";profileMiniAvatar.onerror=()=>{profileMiniAvatar.onerror=null;profileMiniAvatar.src="logo.png";};}
   removePhotoButton.hidden=!url;
 }
 async function loadProfile(user){
   currentUser=user;accountCard.hidden=true;profileCard.hidden=false;
   profileEmail.textContent=user.email||"Cuenta SC LATAM";
+  profileWelcomeName.textContent=user.user_metadata?.display_name||"Miembro SC LATAM";
+  memberSince.textContent=user.created_at?new Intl.DateTimeFormat("es-PE",{year:"numeric",month:"short"}).format(new Date(user.created_at)):"—";
   profileMessage.textContent="Cargando tu perfil…";
   try{
-    const {data,error}=await supabase.from("profiles").select("display_name,avatar_url").eq("id",user.id).maybeSingle();
+    const {data,error}=await supabase.from("profiles").select("display_name,avatar_url,created_at").eq("id",user.id).maybeSingle();
     if(error)throw error;
     displayNameInput.value=data?.display_name||user.user_metadata?.display_name||"";
+    profileWelcomeName.textContent=displayNameInput.value||"Miembro SC LATAM";
+    memberSince.textContent=data?.created_at?new Intl.DateTimeFormat("es-PE",{year:"numeric",month:"short"}).format(new Date(data.created_at)):memberSince.textContent;
     currentAvatarUrl=data?.avatar_url||null;removeAvatarRequested=false;setAvatar(currentAvatarUrl,user);
     profileMessage.textContent=data?.display_name?"Tu perfil está actualizado.":"Elige tu nombre y, si quieres, una foto para personalizar tu cuenta.";
   }catch(error){
@@ -108,6 +116,7 @@ profileForm.addEventListener("submit",async e=>{
     const {error:updateError}=await supabase.from("profiles").update({display_name:displayName,avatar_url:avatarUrl}).eq("id",currentUser.id);
     if(updateError)throw updateError;
     currentAvatarUrl=avatarUrl;removeAvatarRequested=false;photoInput.value="";setAvatar(currentAvatarUrl,currentUser);
+    profileWelcomeName.textContent=displayName;
     profileMessage.textContent="¡Perfil guardado! Tu nombre y foto se actualizaron correctamente.";
     window.dispatchEvent(new CustomEvent("sc-profile-updated",{detail:{displayName,avatarUrl}}));
   }catch(error){
