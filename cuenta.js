@@ -8,6 +8,7 @@ const title=document.getElementById("formTitle");
 const intro=document.getElementById("formIntro");
 const eyebrow=document.getElementById("formEyebrow");
 const submit=document.getElementById("submitButton");
+const googleButton=document.getElementById("googleSignInButton");
 const togglePrompt=document.getElementById("togglePrompt");
 const toggle=document.getElementById("toggleMode");
 const accountCard=document.getElementById("accountCard");
@@ -70,6 +71,32 @@ async function loadProfile(user){
 }
 function showForm(){currentUser=null;accountCard.hidden=false;profileCard.hidden=true;}
 toggle.addEventListener("click",e=>{e.preventDefault();setMode(!signUpMode);});
+
+googleButton.addEventListener("click",async()=>{
+  if(!supabase){message.textContent="El sistema de cuentas aún no está configurado. Inténtalo más tarde.";return;}
+  googleButton.disabled=true;
+  googleButton.textContent="Conectando con Google…";
+  message.textContent="";
+  try{
+    const isAndroidApp=!!(window.AndroidAuth&&typeof window.AndroidAuth.openAuthUrl==="function");
+    const redirectTo=isAndroidApp
+      ?"sclatam://auth/callback"
+      :new URL("/cuenta.html",window.location.origin).toString();
+    const {data,error}=await supabase.auth.signInWithOAuth({
+      provider:"google",
+      options:{redirectTo,skipBrowserRedirect:true}
+    });
+    if(error)throw error;
+    if(!data?.url)throw new Error("Supabase no devolvió la dirección de acceso de Google.");
+    if(isAndroidApp)window.AndroidAuth.openAuthUrl(data.url);
+    else window.location.assign(data.url);
+  }catch(error){
+    console.error("Google sign-in failed",error);
+    message.textContent=error.message||"No se pudo iniciar sesión con Google. Inténtalo de nuevo.";
+    googleButton.disabled=false;
+    googleButton.textContent="Continuar con Google";
+  }
+});
 form.addEventListener("submit",async e=>{
   e.preventDefault();if(!supabase){message.textContent="El sistema de cuentas aún no está configurado. Inténtalo más tarde.";return;}
   submit.disabled=true;submit.textContent=signUpMode?"Creando cuenta…":"Iniciando sesión…";message.textContent="";
