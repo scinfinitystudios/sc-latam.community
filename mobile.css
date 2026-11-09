@@ -506,3 +506,42 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .mobile-sc-logo{width:min(72vw,260px)!important;max-height:138px!important}
   .home-slogan{margin-top:15px!important;font-size:12px!important}
 }
+
+
+/* Barra inferior unificada con el diseño de SC LATAM Store */
+.sc-mobile-bottom-nav{display:none}
+@media(max-width:768px){
+  body{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
+  .sc-mobile-bottom-nav{
+    position:fixed!important;z-index:4000!important;
+    left:8px!important;right:8px!important;
+    bottom:max(8px,env(safe-area-inset-bottom))!important;
+    display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    gap:2px!important;padding:7px 4px!important;
+    border:1px solid #659bff55!important;border-radius:28px!important;
+    background:rgba(8,13,24,.97)!important;
+    -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    box-shadow:0 12px 32px #0008!important;
+  }
+  .sc-mobile-bottom-nav a{
+    display:flex!important;min-width:0!important;min-height:64px!important;
+    flex-direction:column!important;align-items:center!important;justify-content:center!important;
+    gap:3px!important;padding:4px 1px!important;border-radius:20px!important;
+    color:#aebbd0!important;text-decoration:none!important;font-size:20px!important;
+    font-weight:700!important;overflow:hidden!important;
+  }
+  .sc-mobile-bottom-nav a span{display:block!important;line-height:1.15!important}
+  .sc-mobile-bottom-nav a small{
+    display:block!important;font-size:9px!important;font-weight:750!important;
+    line-height:1.2!important;white-space:nowrap!important;
+  }
+  .sc-mobile-bottom-nav a[aria-current="page"]{
+    color:#8bb5ff!important;background:#172942!important;
+  }
+  .sc-mobile-bottom-nav a:active{transform:scale(.96)}
+}
+@media(max-width:390px){
+  .sc-mobile-bottom-nav{left:5px!important;right:5px!important;padding:6px 2px!important}
+  .sc-mobile-bottom-nav a{min-height:60px!important}
+  .sc-mobile-bottom-nav a small{font-size:8px!important}
+}
