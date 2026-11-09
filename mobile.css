@@ -567,3 +567,10 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
     line-height:normal!important;
   }
 }
+
+/* En móvil se utiliza únicamente la barra inferior de seis accesos. */
+@media(max-width:768px){
+  header nav:not(.sc-mobile-bottom-nav){
+    display:none!important;
+  }
+}
