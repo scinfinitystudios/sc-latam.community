@@ -520,3 +520,50 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .sc-mobile-bottom-nav a small{font-size:8px;font-weight:750;white-space:nowrap}
   .sc-mobile-bottom-nav a[aria-current=page]{color:#8bb5ff;background:#6ea4ff1a}
 }
+
+/* Aislar la barra de Tienda de los estilos globales nav/nav a del resto del sitio */
+@media(max-width:640px){
+  nav.sc-mobile-bottom-nav{
+    display:grid!important;
+    position:fixed!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+    order:initial!important;
+    flex:none!important;
+    flex-wrap:initial!important;
+    justify-content:initial!important;
+    align-items:stretch!important;
+    overflow:visible!important;
+    margin:0!important;
+  }
+  .sc-mobile-bottom-nav a{
+    position:static!important;
+    width:auto!important;
+    min-height:52px!important;
+    padding:0!important;
+    font-weight:400!important;
+    line-height:normal!important;
+    transition:none!important;
+  }
+  .sc-mobile-bottom-nav a::before,
+  .sc-mobile-bottom-nav a::after{
+    content:none!important;
+    display:none!important;
+  }
+  .sc-mobile-bottom-nav a span{
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:18px!important;
+    line-height:normal!important;
+  }
+  .sc-mobile-bottom-nav a small{
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+    line-height:normal!important;
+  }
+}
