@@ -365,3 +365,13 @@ header{background:rgba(2,7,20,.88)!important;backdrop-filter:blur(16px);border-b
   .minecraft-sc-logo-wrap img{width:clamp(110px,10vw,150px)!important}
   .minecraft-word{margin-top:10px!important}
 }
+
+/* Navegación móvil unificada: prevalece sobre reglas heredadas */
+@media(max-width:768px){
+  body{padding-bottom:104px!important}
+  header nav{display:none!important}
+  .mobile-bottom-nav{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;left:7px!important;right:7px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;height:68px!important;padding:5px 2px!important}
+  .mobile-bottom-nav a{min-width:0!important;font-size:8px!important;gap:3px!important}
+  .mobile-bottom-nav svg{width:20px!important;height:20px!important;flex:0 0 20px}
+  .mobile-bottom-nav a span{font-size:8px!important;letter-spacing:-.1px}
+}
