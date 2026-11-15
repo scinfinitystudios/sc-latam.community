@@ -23,6 +23,8 @@ En el mismo proyecto Supabase que utiliza la web:
    - **Redirect URLs:** `https://sc-latam-community.vercel.app/cuenta.html`
    - **Redirect URLs:** `sclatam://auth/callback`
 
+Los enlaces de confirmación de correo y recuperación de contraseña también regresan a `https://sc-latam-community.vercel.app/cuenta.html` en la web o a `sclatam://auth/callback` en el APK. Mantén ambas direcciones permitidas.
+
 La URL personalizada `sclatam://auth/callback` debe estar permitida exactamente para que Supabase pueda devolver el inicio de sesión a la app Android.
 
 ## 3. Compilar e instalar la app Android
@@ -34,7 +36,7 @@ El cambio en AndroidManifest y MainActivity activa el callback profundo. El work
 - Web: abre `https://sc-latam-community.vercel.app/cuenta.html`, pulsa **Continuar con Google** y comprueba que vuelve a la página de cuenta con la sesión iniciada.
 - Android: instala el APK nuevo, abre Mi cuenta, pulsa **Continuar con Google**, completa el acceso en el navegador externo y comprueba que regresa a la app y muestra el perfil.
 
-El acceso tradicional con correo y contraseña permanece disponible.
+El acceso tradicional con correo y contraseña permanece disponible. La página también incluye recuperación de contraseña por correo y reenvío del mensaje de confirmación. Los enlaces de confirmación y recuperación usan el mismo destino web o el enlace profundo de Android según desde dónde se soliciten.
 
 ## Notas de seguridad
 
