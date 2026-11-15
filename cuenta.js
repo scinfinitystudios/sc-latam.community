@@ -27,7 +27,7 @@ const choosePhotoButton=document.getElementById("choosePhotoButton");
 const removePhotoButton=document.getElementById("removePhotoButton");
 const saveProfileButton=document.getElementById("saveProfileButton");
 
-let supabase=null,signUpMode=false,currentUser=null,currentAvatarUrl=null,removeAvatarRequested=false;
+let supabase=null,supabaseHost=null,signUpMode=false,currentUser=null,currentAvatarUrl=null,removeAvatarRequested=false,pendingConfirmationEmail="";
 const MAX_PHOTO_BYTES=3*1024*1024;
 const ALLOWED_TYPES=["image/jpeg","image/png","image/webp"];
 
@@ -79,16 +79,14 @@ googleButton.addEventListener("click",async()=>{
   message.textContent="";
   try{
     const isAndroidApp=!!(window.AndroidAuth&&typeof window.AndroidAuth.openAuthUrl==="function");
-    const redirectTo=isAndroidApp
-      ?"sclatam://auth/callback"
-      :new URL("/cuenta.html",window.location.origin).toString();
+    const redirectTo=isAndroidApp?"sclatam://auth/callback":new URL("/cuenta.html",window.location.origin).toString();
     const {data,error}=await supabase.auth.signInWithOAuth({
       provider:"google",
       options:{redirectTo,skipBrowserRedirect:true}
     });
     if(error)throw error;
     if(!data?.url)throw new Error("Supabase no devolvió la dirección de acceso de Google.");
-    if(isAndroidApp)window.AndroidAuth.openAuthUrl(data.url);
+    if(isAndroidApp)window.AndroidAuth.openAuthUrl(data.url,supabaseHost);
     else window.location.assign(data.url);
   }catch(error){
     console.error("Google sign-in failed",error);
@@ -103,7 +101,7 @@ form.addEventListener("submit",async e=>{
   try{
     const email=emailInput.value.trim(),password=passwordInput.value;
     if(signUpMode){
-      const {data,error}=await supabase.auth.signUp({email,password});if(error)throw error;
+      const {data,error}=await supabase.auth.signUp({email,password,options:{emailRedirectTo:window.AndroidAuth&&typeof window.AndroidAuth.openAuthUrl==="function"?"sclatam://auth/callback":new URL("/cuenta.html",window.location.origin).toString()}});if(error)throw error;
       if(data.session){await loadProfile(data.user);return;}
       message.textContent="Cuenta creada. Revisa tu correo para confirmar la dirección y luego inicia sesión.";
     }else{const {data,error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;await loadProfile(data.user);}
@@ -161,6 +159,7 @@ async function init(){
   try{
     const response=await fetch("/api/config",{cache:"no-store"}),config=await response.json();
     if(!response.ok||!config.url||!config.anonKey)throw new Error("CONFIG_MISSING");
+    supabaseHost=new URL(config.url).host;
     supabase=createClient(config.url,config.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
     const {data,error}=await supabase.auth.getSession();if(error)throw error;
     if(data.session)await loadProfile(data.session.user);
