@@ -70,6 +70,17 @@ body{min-height:100vh;background:#050816;color:#f5f7fb}
 </form>
 <p class="account-message" id="profileMessage" role="status" aria-live="polite"></p><button class="account-submit" id="logoutButton" type="button">CERRAR SESIÓN</button>
 </section>
+<section class="account-card" id="recoveryCard" hidden>
+  <span class="account-eyebrow">SEGURIDAD DE CUENTA</span>
+  <h2>Crear nueva contraseña</h2>
+  <p class="account-muted">Escribe una contraseña nueva de al menos 8 caracteres.</p>
+  <form id="recoveryForm" class="account-form">
+    <label for="recoveryPassword">NUEVA CONTRASEÑA</label>
+    <input id="recoveryPassword" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required>
+    <button class="account-submit" type="submit">Guardar nueva contraseña</button>
+  </form>
+  <p class="account-message" id="recoveryMessage" role="status" aria-live="polite"></p>
+</section>
 </div>
 
 </main><footer class="account-footer">© 2026 SC - Infinity Studios, Inc.</footer><script type="module" src="cuenta.js"></script>
