@@ -73,10 +73,10 @@ public class MainActivity extends Activity {
 
     private final class AndroidAuthBridge {
         @JavascriptInterface
-        public void openAuthUrl(String rawUrl) {
+        public void openAuthUrl(String rawUrl, String expectedHost) {
             runOnUiThread(() -> {
                 Uri uri = Uri.parse(rawUrl == null ? "" : rawUrl);
-                if (!isTrustedSupabaseAuthorizeUrl(uri)) return;
+                if (!isTrustedSupabaseAuthorizeUrl(uri, expectedHost)) return;
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 } catch (Exception ignored) { }
@@ -84,11 +84,13 @@ public class MainActivity extends Activity {
         }
     }
 
-    private boolean isTrustedSupabaseAuthorizeUrl(Uri uri) {
+    private boolean isTrustedSupabaseAuthorizeUrl(Uri uri, String expectedHost) {
         String scheme = uri.getScheme();
         String host = uri.getHost();
         return "https".equalsIgnoreCase(scheme)
                 && host != null
+                && expectedHost != null
+                && host.equalsIgnoreCase(expectedHost)
                 && host.toLowerCase().endsWith(".supabase.co")
                 && "/auth/v1/authorize".equals(uri.getPath());
     }
