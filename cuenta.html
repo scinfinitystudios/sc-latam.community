@@ -73,11 +73,15 @@ body{min-height:100vh;background:#050816;color:#f5f7fb}
 <section class="account-card" id="recoveryCard" hidden>
   <span class="account-eyebrow">SEGURIDAD DE CUENTA</span>
   <h2>Crear nueva contraseña</h2>
-  <p class="account-muted">Escribe una contraseña nueva de al menos 8 caracteres.</p>
+  <p class="account-muted">Introduce el código de 6 dígitos que te enviamos por correo y elige una contraseña nueva.</p>
   <form id="recoveryForm" class="account-form">
+    <label for="recoveryEmail">CORREO ELECTRÓNICO</label>
+    <input id="recoveryEmail" type="email" autocomplete="email" required>
+    <label for="recoveryToken">CÓDIGO DE RECUPERACIÓN</label>
+    <input id="recoveryToken" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" placeholder="123456" required>
     <label for="recoveryPassword">NUEVA CONTRASEÑA</label>
     <input id="recoveryPassword" type="password" minlength="8" maxlength="72" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required>
-    <button class="account-submit" type="submit">Guardar nueva contraseña</button>
+    <button class="account-submit" type="submit">Verificar código y guardar contraseña</button>
   </form>
   <p class="account-message" id="recoveryMessage" role="status" aria-live="polite"></p>
 </section>
