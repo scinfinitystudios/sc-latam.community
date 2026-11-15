@@ -42,3 +42,22 @@ El acceso tradicional con correo y contraseña permanece disponible. La página 
 
 - El Client Secret de Google se configura solo en Supabase.
 - La app usa un esquema Android personalizado (`sclatam://`). Para una protección superior contra la apropiación del esquema por otra app, se puede migrar más adelante a Android App Links verificados con dominio HTTPS y `assetlinks.json`.
+
+
+## Recuperación de contraseña mediante código de 6 dígitos
+
+Para evitar que los sistemas de previsualización de correo consuman el enlace de un solo uso antes de que la persona lo abra, SC LATAM usa verificación OTP para recuperar contraseñas.
+
+En Supabase Dashboard abre **Authentication → Email Templates → Reset Password** y sustituye el contenido por:
+
+```html
+<h2>Restablece tu contraseña de SC LATAM</h2>
+<p>Recibimos una solicitud para cambiar la contraseña de tu cuenta.</p>
+<p>Introduce este código de 6 dígitos en la página de recuperación de SC LATAM:</p>
+<p style="font-size:32px;font-weight:bold;letter-spacing:8px">{{ .Token }}</p>
+<p>Si no solicitaste este cambio, ignora este correo.</p>
+```
+
+Asunto recomendado: `Código para restablecer tu contraseña de SC LATAM`.
+
+El usuario solicita el correo desde `cuenta.html`, escribe el código de 6 dígitos y su nueva contraseña en el formulario. El código se verifica con `supabase.auth.verifyOtp({ email, token, type: "recovery" })` antes de actualizar la contraseña. No uses `{{ .ConfirmationURL }}` en esta plantilla OTP.
