@@ -27,7 +27,7 @@ const choosePhotoButton=document.getElementById("choosePhotoButton");
 const removePhotoButton=document.getElementById("removePhotoButton");
 const saveProfileButton=document.getElementById("saveProfileButton");
 
-let supabase=null,supabaseHost=null,signUpMode=false,currentUser=null,currentAvatarUrl=null,removeAvatarRequested=false,pendingConfirmationEmail="";
+let supabase=null,supabaseHost=null,signUpMode=false,currentUser=null,currentAvatarUrl=null,removeAvatarRequested=false,pendingConfirmationEmail="",isCompletingRecovery=false;
 const MAX_PHOTO_BYTES=3*1024*1024;
 const ALLOWED_TYPES=["image/jpeg","image/png","image/webp"];
 
@@ -87,7 +87,10 @@ document.getElementById("forgotPasswordButton").addEventListener("click",async()
   try{
     const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
     if(error)throw error;
-    message.textContent="Si el correo está registrado, recibirás un enlace para restablecer tu contraseña. Revisa Spam.";
+    document.getElementById("recoveryEmail").value=email;
+    accountCard.hidden=true;profileCard.hidden=true;
+    document.getElementById("recoveryCard").hidden=false;
+    document.getElementById("recoveryMessage").textContent="Te enviamos un código de 6 dígitos. Escríbelo aquí para crear tu contraseña nueva. Revisa Spam si no aparece.";
   }catch(error){message.textContent=error.message||"No se pudo enviar el enlace.";}
   finally{button.disabled=false;}
 });
@@ -106,20 +109,30 @@ document.getElementById("resendConfirmationButton").addEventListener("click",asy
 
 document.getElementById("recoveryForm").addEventListener("submit",async(event)=>{
   event.preventDefault();
+  const email=document.getElementById("recoveryEmail").value.trim();
+  const token=document.getElementById("recoveryToken").value.trim();
   const password=document.getElementById("recoveryPassword").value;
   const feedback=document.getElementById("recoveryMessage");
   const button=event.currentTarget.querySelector('button[type="submit"]');
+  if(!/^[0-9]{6}$/.test(token)){feedback.textContent="Escribe el código de 6 dígitos que recibiste por correo.";return;}
   if(password.length<8){feedback.textContent="La contraseña debe tener al menos 8 caracteres.";return;}
-  button.disabled=true;button.textContent="Guardando…";
+  button.disabled=true;button.textContent="Verificando código…";isCompletingRecovery=true;
   try{
-    const {error}=await supabase.auth.updateUser({password});
-    if(error)throw error;
+    const {error:verifyError}=await supabase.auth.verifyOtp({email,token,type:"recovery"});
+    if(verifyError)throw verifyError;
+    button.textContent="Actualizando contraseña…";
+    const {error:updateError}=await supabase.auth.updateUser({password});
+    if(updateError)throw updateError;
+    isCompletingRecovery=false;
     document.getElementById("recoveryCard").hidden=true;
-    message.textContent="Contraseña actualizada. Ya puedes iniciar sesión.";
-    const {data}=await supabase.auth.getUser();
-    if(data.user)await loadProfile(data.user);
-  }catch(error){feedback.textContent=error.message||"No se pudo actualizar la contraseña. Solicita otro enlace.";}
-  finally{button.disabled=false;button.textContent="Guardar nueva contraseña";}
+    document.getElementById("recoveryToken").value="";
+    document.getElementById("recoveryPassword").value="";
+    message.textContent="Contraseña actualizada correctamente. Ya puedes iniciar sesión.";
+    showForm();setMode(false);
+  }catch(error){
+    isCompletingRecovery=false;
+    feedback.textContent=error.message||"El código no es válido o ha caducado. Solicita uno nuevo.";
+  }finally{button.disabled=false;button.textContent="Verificar código y guardar contraseña";}
 });
 
 googleButton.addEventListener("click",async()=>{
@@ -218,7 +231,7 @@ async function init(){
         document.getElementById("recoveryMessage").textContent="Crea una contraseña nueva para tu cuenta SC LATAM.";
       }else if(event==="SIGNED_OUT"||!session){
         document.getElementById("recoveryCard").hidden=true;showForm();
-      }else if(event==="SIGNED_IN"||event==="USER_UPDATED"){
+      }else if((event==="SIGNED_IN"||event==="USER_UPDATED")&&!isCompletingRecovery){
         document.getElementById("recoveryCard").hidden=true;setTimeout(()=>loadProfile(session.user),0);
       }
     });
