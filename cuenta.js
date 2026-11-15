@@ -87,10 +87,7 @@ document.getElementById("forgotPasswordButton").addEventListener("click",async()
   try{
     const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
     if(error)throw error;
-    document.getElementById("recoveryEmail").value=email;
-    accountCard.hidden=true;profileCard.hidden=true;
-    document.getElementById("recoveryCard").hidden=false;
-    document.getElementById("recoveryMessage").textContent="Te enviamos un código de 6 dígitos. Escríbelo aquí para crear tu contraseña nueva. Revisa Spam si no aparece.";
+    message.textContent="Te enviamos un enlace para restablecer tu contraseña. Abre el correo desde este dispositivo y pulsa «Reset password». Si no aparece, revisa Spam.";
   }catch(error){message.textContent=error.message||"No se pudo enviar el enlace.";}
   finally{button.disabled=false;}
 });
@@ -109,30 +106,24 @@ document.getElementById("resendConfirmationButton").addEventListener("click",asy
 
 document.getElementById("recoveryForm").addEventListener("submit",async(event)=>{
   event.preventDefault();
-  const email=document.getElementById("recoveryEmail").value.trim();
-  const token=document.getElementById("recoveryToken").value.trim();
   const password=document.getElementById("recoveryPassword").value;
   const feedback=document.getElementById("recoveryMessage");
   const button=event.currentTarget.querySelector('button[type="submit"]');
-  if(!/^[0-9]{6}$/.test(token)){feedback.textContent="Escribe el código de 6 dígitos que recibiste por correo.";return;}
   if(password.length<8){feedback.textContent="La contraseña debe tener al menos 8 caracteres.";return;}
-  button.disabled=true;button.textContent="Verificando código…";isCompletingRecovery=true;
+  button.disabled=true;button.textContent="Actualizando contraseña…";isCompletingRecovery=true;
   try{
-    const {error:verifyError}=await supabase.auth.verifyOtp({email,token,type:"recovery"});
-    if(verifyError)throw verifyError;
-    button.textContent="Actualizando contraseña…";
-    const {error:updateError}=await supabase.auth.updateUser({password});
-    if(updateError)throw updateError;
+    const {error}=await supabase.auth.updateUser({password});
+    if(error)throw error;
     isCompletingRecovery=false;
     document.getElementById("recoveryCard").hidden=true;
-    document.getElementById("recoveryToken").value="";
     document.getElementById("recoveryPassword").value="";
-    message.textContent="Contraseña actualizada correctamente. Ya puedes iniciar sesión.";
+    await supabase.auth.signOut();
     showForm();setMode(false);
+    message.textContent="Contraseña actualizada correctamente. Ya puedes iniciar sesión con tu nueva contraseña.";
   }catch(error){
     isCompletingRecovery=false;
-    feedback.textContent=error.message||"El código no es válido o ha caducado. Solicita uno nuevo.";
-  }finally{button.disabled=false;button.textContent="Verificar código y guardar contraseña";}
+    feedback.textContent=error.message||"No se pudo actualizar la contraseña. Solicita un nuevo enlace.";
+  }finally{button.disabled=false;button.textContent="Guardar nueva contraseña";}
 });
 
 googleButton.addEventListener("click",async()=>{
