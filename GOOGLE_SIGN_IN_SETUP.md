@@ -7,14 +7,14 @@ El código de Google Sign-In ya está integrado en la página de cuenta y en la 
 1. En Google Cloud Console, crea o selecciona un proyecto.
 2. Configura la pantalla de consentimiento OAuth y completa los datos requeridos de la aplicación.
 3. Crea credenciales de tipo **OAuth client ID** para aplicación web.
-4. En **Authorized redirect URIs**, agrega exactamente la URL de callback que muestra Supabase en Authentication → Providers → Google. Suele tener el formato `https://<project-ref>.supabase.co/auth/v1/callback`; copia la URL real de tu proyecto, no uses literalmente el ejemplo.
+4. En **Authorized redirect URIs**, agrega exactamente la URL de callback que muestra Supabase en Authentication → Providers → Google. Suele tener el formato `https://kagyykeslcirzorohoqu.supabase.co/auth/v1/callback`; esta es la URL del proyecto Supabase conectado a SC LATAM.
 5. Guarda el **Client ID** y el **Client Secret**.
 
 No guardes el Client Secret en el repositorio ni en el frontend.
 
 ## 2. Supabase
 
-En el mismo proyecto Supabase que utiliza la web:
+En el proyecto Supabase `kagyykeslcirzorohoqu` (el proyecto activo visible en la conexión Supabase):
 
 1. Abre Authentication → Providers → Google y activa Google.
 2. Pega el Client ID y Client Secret de Google Cloud y guarda.
