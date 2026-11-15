@@ -136,7 +136,7 @@ googleButton.addEventListener("click",async()=>{
     });
     if(error)throw error;
     if(!data?.url)throw new Error("Supabase no devolvió la dirección de acceso de Google.");
-    if(isAndroidApp)window.AndroidAuth.openAuthUrl(data.url,supabaseHost);
+    if(isAndroidApp){window.AndroidAuth.openAuthUrl(data.url,supabaseHost);googleButton.disabled=false;googleButton.textContent="Continuar con Google";}
     else window.location.assign(data.url);
   }catch(error){
     console.error("Google sign-in failed",error);
@@ -211,8 +211,7 @@ async function init(){
     if(!response.ok||!config.url||!config.anonKey)throw new Error("CONFIG_MISSING");
     supabaseHost=new URL(config.url).host;
     supabase=createClient(config.url,config.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-    const {data,error}=await supabase.auth.getSession();if(error)throw error;
-    if(data.session)await loadProfile(data.session.user);
+    const isRecoveryCallback=new URLSearchParams(window.location.hash.slice(1)).get("type")==="recovery";
     supabase.auth.onAuthStateChange((event,session)=>{
       if(event==="PASSWORD_RECOVERY"){
         accountCard.hidden=true;profileCard.hidden=true;document.getElementById("recoveryCard").hidden=false;
@@ -223,6 +222,11 @@ async function init(){
         document.getElementById("recoveryCard").hidden=true;setTimeout(()=>loadProfile(session.user),0);
       }
     });
+    const {data,error}=await supabase.auth.getSession();if(error)throw error;
+    if(isRecoveryCallback){
+      accountCard.hidden=true;profileCard.hidden=true;document.getElementById("recoveryCard").hidden=false;
+      document.getElementById("recoveryMessage").textContent="Crea una contraseña nueva para tu cuenta SC LATAM.";
+    }else if(data.session){await loadProfile(data.session.user);}
   }catch(e){console.error("SC account initialization failed",e);message.textContent="El sistema de cuentas aún no está configurado. El administrador debe completar la configuración de Supabase.";}
 }
 init();
