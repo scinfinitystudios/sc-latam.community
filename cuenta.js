@@ -72,6 +72,56 @@ async function loadProfile(user){
 function showForm(){currentUser=null;accountCard.hidden=false;profileCard.hidden=true;}
 toggle.addEventListener("click",e=>{e.preventDefault();setMode(!signUpMode);});
 
+function authRedirectUrl(){
+  return window.AndroidAuth&&typeof window.AndroidAuth.openAuthUrl==="function"
+    ?"sclatam://auth/callback"
+    :new URL("/cuenta.html",window.location.origin).toString();
+}
+
+document.getElementById("forgotPasswordButton").addEventListener("click",async()=>{
+  if(!supabase){message.textContent="El sistema de cuentas no está configurado.";return;}
+  const email=emailInput.value.trim();
+  if(!email){message.textContent="Escribe tu correo para enviarte el enlace.";emailInput.focus();return;}
+  const button=document.getElementById("forgotPasswordButton");
+  button.disabled=true;message.textContent="Enviando enlace de recuperación…";
+  try{
+    const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:authRedirectUrl()});
+    if(error)throw error;
+    message.textContent="Si el correo está registrado, recibirás un enlace para restablecer tu contraseña. Revisa Spam.";
+  }catch(error){message.textContent=error.message||"No se pudo enviar el enlace.";}
+  finally{button.disabled=false;}
+});
+
+document.getElementById("resendConfirmationButton").addEventListener("click",async()=>{
+  if(!supabase||!pendingConfirmationEmail)return;
+  const button=document.getElementById("resendConfirmationButton");
+  button.disabled=true;
+  try{
+    const {error}=await supabase.auth.resend({type:"signup",email:pendingConfirmationEmail,options:{emailRedirectTo:authRedirectUrl()}});
+    if(error)throw error;
+    message.textContent="Si la cuenta necesita confirmación, enviaremos otro correo. Revisa Spam.";
+  }catch(error){message.textContent=error.message||"No se pudo reenviar el correo.";}
+  finally{button.disabled=false;}
+});
+
+document.getElementById("recoveryForm").addEventListener("submit",async(event)=>{
+  event.preventDefault();
+  const password=document.getElementById("recoveryPassword").value;
+  const feedback=document.getElementById("recoveryMessage");
+  const button=event.currentTarget.querySelector('button[type="submit"]');
+  if(password.length<8){feedback.textContent="La contraseña debe tener al menos 8 caracteres.";return;}
+  button.disabled=true;button.textContent="Guardando…";
+  try{
+    const {error}=await supabase.auth.updateUser({password});
+    if(error)throw error;
+    document.getElementById("recoveryCard").hidden=true;
+    message.textContent="Contraseña actualizada. Ya puedes iniciar sesión.";
+    const {data}=await supabase.auth.getUser();
+    if(data.user)await loadProfile(data.user);
+  }catch(error){feedback.textContent=error.message||"No se pudo actualizar la contraseña. Solicita otro enlace.";}
+  finally{button.disabled=false;button.textContent="Guardar nueva contraseña";}
+});
+
 googleButton.addEventListener("click",async()=>{
   if(!supabase){message.textContent="El sistema de cuentas aún no está configurado. Inténtalo más tarde.";return;}
   googleButton.disabled=true;
@@ -103,7 +153,7 @@ form.addEventListener("submit",async e=>{
     if(signUpMode){
       const {data,error}=await supabase.auth.signUp({email,password,options:{emailRedirectTo:window.AndroidAuth&&typeof window.AndroidAuth.openAuthUrl==="function"?"sclatam://auth/callback":new URL("/cuenta.html",window.location.origin).toString()}});if(error)throw error;
       if(data.session){await loadProfile(data.user);return;}
-      message.textContent="Cuenta creada. Revisa tu correo para confirmar la dirección y luego inicia sesión.";
+      pendingConfirmationEmail=email;document.getElementById("resendConfirmationButton").hidden=false;message.textContent="Cuenta creada. Confirma tu correo desde el enlace que te enviamos y luego inicia sesión.";
     }else{const {data,error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;await loadProfile(data.user);}
   }catch(err){message.textContent=err.message==="Invalid login credentials"?"Correo o contraseña incorrectos.":(err.message||"No se pudo completar la operación.");}
   finally{submit.disabled=false;submit.textContent=signUpMode?"Crear mi cuenta":"Iniciar sesión";}
@@ -164,8 +214,14 @@ async function init(){
     const {data,error}=await supabase.auth.getSession();if(error)throw error;
     if(data.session)await loadProfile(data.session.user);
     supabase.auth.onAuthStateChange((event,session)=>{
-      if(event==="SIGNED_OUT"||!session)showForm();
-      else if(event==="SIGNED_IN"||event==="USER_UPDATED")setTimeout(()=>loadProfile(session.user),0);
+      if(event==="PASSWORD_RECOVERY"){
+        accountCard.hidden=true;profileCard.hidden=true;document.getElementById("recoveryCard").hidden=false;
+        document.getElementById("recoveryMessage").textContent="Crea una contraseña nueva para tu cuenta SC LATAM.";
+      }else if(event==="SIGNED_OUT"||!session){
+        document.getElementById("recoveryCard").hidden=true;showForm();
+      }else if(event==="SIGNED_IN"||event==="USER_UPDATED"){
+        document.getElementById("recoveryCard").hidden=true;setTimeout(()=>loadProfile(session.user),0);
+      }
     });
   }catch(e){console.error("SC account initialization failed",e);message.textContent="El sistema de cuentas aún no está configurado. El administrador debe completar la configuración de Supabase.";}
 }
